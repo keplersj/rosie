@@ -6,21 +6,21 @@
 # The above will handle all files NOT found below
 #
 # These files are text and should be normalized (Convert crlf => lf)
-*.css           text
-*.df            text
-*.htm           text
-*.html          text
-*.java          text
-*.js            text
-*.json          text
-*.jsp           text
-*.jspf          text
-*.properties    text
-*.sh            text
-*.svg           text
-*.tld           text
-*.txt           text
-*.xml           text
+*.css           text -crlf
+*.df            text -crlf
+*.htm           text -crlf
+*.html          text -crlf
+*.java          text -crlf
+*.js            text -crlf
+*.json          text -crlf
+*.jsp           text -crlf
+*.jspf          text -crlf
+*.properties    text -crlf
+*.sh            text -crlf
+*.svg           text -crlf
+*.tld           text -crlf
+*.txt           text -crlf
+*.xml           text -crlf
 
 # These files are binary and should be left untouched
 # (binary is a macro for -text -diff)
