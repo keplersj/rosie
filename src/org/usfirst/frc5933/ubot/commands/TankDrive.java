@@ -11,6 +11,7 @@
 
 package org.usfirst.frc5933.ubot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc5933.ubot.Robot;
 
@@ -42,7 +43,8 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.tankDrive(Robot.oi.getLeftJoystick(), Robot.oi.getRightJoystick());
+    	Robot.driveTrain.tankDrive(Robot.oi.getxbox().getY(GenericHID.Hand.kLeft),
+                Robot.oi.getxbox().getY(GenericHID.Hand.kRight));
     }
 
     // Make this return true when this Command no longer needs to run execute()

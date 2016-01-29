@@ -58,6 +58,10 @@ public class DriveTrain extends Subsystem {
     	robotDrive.tankDrive(leftStick, rightStick);
     }
 
+    public void tankDrive(double leftStick, double rightStick) {
+        robotDrive.tankDrive(leftStick, rightStick);
+    }
+
     public void arcadeDrive(Joystick stick) {
     	robotDrive.arcadeDrive(stick);
     }
