@@ -38,21 +38,14 @@ Children:
         Name: FrontRightMotor
       - Children: []
         Properties:
-          Type: !!robotbuilder.data.properties.ChoicesProperty
-            choices: [Victor, Jaguar, Talon, VictorSP, TalonSRX, Spark, SD540]
-            default: Talon
-            name: Type
-            validators: null
-            value: Victor
-          Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-            choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-              '12', '13', '14', '15', '16', '17', '18', '19']
-            default: '0'
-            name: Output Channel (PWM)
-            validators: [PWMOutput]
-            value: '0'
-        Base: Speed Controller
-        Name: BackRightMotor
+          CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+            choices: *id001
+            default: '2'
+            name: CAN ID
+            validators: *id002
+            value: '13'
+        Base: CAN Talon
+        Name: RearRightMotor
       Properties:
         Sensitivity: !!robotbuilder.data.properties.DoubleProperty {default: 0.5,
           name: Sensitivity, validators: null, value: 0.5}
@@ -61,7 +54,7 @@ Children:
           name: Right Rear Motor
           type: PIDOutput
           validators: [RobotDrive4, ChildDropdownSelected]
-          value: DriveTrain BackRightMotor
+          value: DriveTrain RearRightMotor
         Right Front Motor: !!robotbuilder.data.properties.ChildSelectionProperty
           default: 2
           name: Right Front Motor
