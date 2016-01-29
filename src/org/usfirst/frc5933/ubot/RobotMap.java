@@ -49,7 +49,6 @@ public class RobotMap {
         
         driveTrainRearRightMotor = new CANTalon(13);
         LiveWindow.addActuator("DriveTrain", "RearRightMotor", driveTrainRearRightMotor);
-        
         driveTrainRobotDrive = new RobotDrive(driveTrainFrontLeftMotor, driveTrainRearLeftMotor,
               driveTrainFrontRightMotor, driveTrainRearRightMotor);
         
