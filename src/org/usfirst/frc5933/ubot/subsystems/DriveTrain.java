@@ -70,6 +70,26 @@ public class DriveTrain extends Subsystem {
     	robotDrive.arcadeDrive(stick);
     }
 
+    /**
+     * Takes a joystick input and cubes before sending the values to the robot
+     * @param stick
+     */
+    public void cubicArcadeDrive(Joystick stick) {
+        cubicAracdeDrive(stick.getY(), stick.getX());
+    }
+
+    /**
+     * Takes arcade driving values and cubes them before sending the values to the robot.
+     *
+     * @param move How much the bot is wanted to move.
+     * @param rotate How much the bot is wanted to rotate.
+     */
+    public void cubicAracdeDrive(double move, double rotate) {
+        double newMove = Math.pow(move, 3);
+        double newRotate = Math.pow(rotate, 3);
+        robotDrive.arcadeDrive(newMove, newRotate);
+    }
+
     public void driveStraight(double speed) {
     	robotDrive.tankDrive(speed, speed);
     }
