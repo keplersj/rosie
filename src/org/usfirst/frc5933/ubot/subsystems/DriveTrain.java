@@ -66,6 +66,13 @@ public class DriveTrain extends Subsystem {
         robotDrive.tankDrive(leftStick, rightStick);
     }
 
+    public void mechDrive(Joystick stick) {
+        // TODO: scale the values and call tank or arcade drive
+    	double x = stick.getX();
+    	double y = stick.getY(); 
+        robotDrive.tankDrive(y, x);
+    }
+
     public void arcadeDrive(Joystick stick) {
     	robotDrive.arcadeDrive(stick);
     }
