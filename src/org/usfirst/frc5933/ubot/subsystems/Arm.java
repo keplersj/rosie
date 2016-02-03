@@ -58,5 +58,19 @@ public class Arm extends Subsystem {
     public void stop() {
     	windowMotor.set(0);
     }
+    
+    public boolean isStopped() {
+    	boolean stopped = windowMotor.get() == 0; 
+    	if (stopped) {
+    		// TODO: not working
+    		System.out.println("arm stopped: ");
+    		System.out.println(windowMotor.get());
+    	}
+    	else {
+    		System.out.println("arm running: ");
+    		System.out.println(windowMotor.get());
+    	}
+    	return stopped;
+    }
 }
 
