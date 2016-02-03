@@ -64,9 +64,9 @@ public class OI {
 
         xBoxJoystick = new Joystick(0);
         
-        rightBumper = new JoystickButton(xBoxJoystick, 5);
+        rightBumper = new JoystickButton(xBoxJoystick, 6);
         rightBumper.whileHeld(new LiftingArmDown());
-        leftBumper = new JoystickButton(xBoxJoystick, 4);
+        leftBumper = new JoystickButton(xBoxJoystick, 5);
         leftBumper.whileHeld(new LiftingArmUp());
 
 
