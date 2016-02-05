@@ -571,6 +571,83 @@ Children:
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
     Name: NullCommand
+  - Children: []
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value:
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: Portcullis, type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: ChevalDeFrise,
+          type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: Moat, type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: Rampart, type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: Drawbridge, type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: SallyPort, type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: RockWall, type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: RoughTerrain,
+          type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: LowBar, type: boolean}
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: DriveTrain}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: []
+        name: Parameter presets
+        validators: null
+        value:
+        - !!robotbuilder.data.properties.ParameterSet
+          name: LowBarPreset
+          parameters:
+          - {name: Portcullis, type: boolean, value: 'false'}
+          - {name: ChevalDeFrise, type: boolean, value: 'false'}
+          - {name: Moat, type: boolean, value: 'false'}
+          - {name: Rampart, type: boolean, value: 'false'}
+          - {name: Drawbridge, type: boolean, value: 'false'}
+          - {name: SallyPort, type: boolean, value: 'false'}
+          - {name: RockWall, type: boolean, value: 'false'}
+          - {name: RoughTerrain, type: boolean, value: 'false'}
+          - {name: LowBar, type: boolean, value: 'true'}
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command
+    Name: DriveOverBarriers
+  - Children: []
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value:
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: TopLeftOpening,
+          type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: TopMiddleOpening,
+          type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: TopRightOpening,
+          type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: BottomLeftOpening,
+          type: boolean}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: BottomRightOpening,
+          type: boolean}
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: DriveTrain}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id006
+        - !!robotbuilder.data.properties.ParameterSet
+          name: DefaultTopMiddle
+          parameters:
+          - {name: TopLeftOpening, type: boolean, value: 'false'}
+          - {name: TopMiddleOpening, type: boolean, value: 'true'}
+          - {name: TopRightOpening, type: boolean, value: 'false'}
+          - {name: BottomLeftOpening, type: boolean, value: 'false'}
+          - {name: BottomRightOpening, type: boolean, value: 'false'}
+        name: Parameter presets
+        validators: null
+        value: *id006
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command
+    Name: DriveToTower
   Properties: {}
   Base: Commands
   Name: Commands
