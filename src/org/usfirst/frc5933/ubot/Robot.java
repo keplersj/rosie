@@ -80,7 +80,8 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, 0);
+        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, 0);
     }
 
     public void disabledPeriodic() {
@@ -126,8 +127,8 @@ public class Robot extends IterativeRobot {
         // TODO: We may want to set the range parameter on the accelerometer during initialization
         // (AKA: RobotInit) to get better feedback. ie: accel.SetRange(Accelerometer::Range::kRange_2G);
 
-        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, (int) Math.abs(accel_y + accel_z));
-        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, (int) Math.abs(accel_x + accel_z));
+        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, (int) Math.abs((accel_z + accel_x) / 10));
+        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, (int) Math.abs((accel_z + accel_y) / 10));
 }
 
     /**

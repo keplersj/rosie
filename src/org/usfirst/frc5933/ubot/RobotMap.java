@@ -60,10 +60,6 @@ public class RobotMap {
         driveTrainRobotDrive.setExpiration(0.1);
         driveTrainRobotDrive.setSensitivity(0.5);
         driveTrainRobotDrive.setMaxOutput(1.0);
-        driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-        driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-        driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         powerPowerDistributionPanel = new PowerDistributionPanel(0);
         LiveWindow.addSensor("Power", "PowerDistributionPanel", powerPowerDistributionPanel);
         
