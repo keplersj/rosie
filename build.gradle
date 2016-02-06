@@ -7,7 +7,7 @@ buildscript {
 	}
   }
   dependencies {
-    classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+'
+    classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+', classifier: 'Toast'
   }
 }
 
@@ -22,6 +22,18 @@ sourceSets {
       srcDir 'src'
     }
   }
+}
+
+repositories {
+    jcenter()
+    maven {
+        name = "Toast"
+        url = "http://dev.imjac.in/maven"
+    }
+}
+
+dependencies {
+    compile group: 'jaci.openrio.toast', name: 'Toast', version: '+'
 }
 
 gradlerio.robotClass = 'org.usfirst.frc5933.ubot.Robot'
