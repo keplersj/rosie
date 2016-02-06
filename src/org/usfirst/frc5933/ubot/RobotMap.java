@@ -60,6 +60,7 @@ public class RobotMap {
         driveTrainRobotDrive.setExpiration(0.1);
         driveTrainRobotDrive.setSensitivity(0.5);
         driveTrainRobotDrive.setMaxOutput(1.0);
+
         powerPowerDistributionPanel = new PowerDistributionPanel(0);
         LiveWindow.addSensor("Power", "PowerDistributionPanel", powerPowerDistributionPanel);
         

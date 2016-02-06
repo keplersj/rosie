@@ -94,10 +94,8 @@ public class OI {
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("ArcadeDrive", new ArcadeDrive());
-        SmartDashboard.putData("TankDrive", new TankDrive());
         SmartDashboard.putData("LiftingArmUp", new LiftingArmUp());
         SmartDashboard.putData("LiftingArmDown", new LiftingArmDown());
-        SmartDashboard.putData("MechDrive", new MechDrive());
         SmartDashboard.putData("DriveOverBarriers: LowBarPreset", new DriveOverBarriers(false, false, false, false, false, false, false, false, true));
         SmartDashboard.putData("DriveToTower: DefaultTopMiddle", new DriveToTower(false, true, false, false, false));
 
