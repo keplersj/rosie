@@ -50,11 +50,11 @@ public class Arm extends Subsystem {
     }
     
     public void up() {
-    	windowMotor.set(1);
+    	windowMotor.set(.25);
     }
 
     public void down() {
-    	windowMotor.set(-1);
+    	windowMotor.set(-0.25);
     }
     
     public void stop() {
