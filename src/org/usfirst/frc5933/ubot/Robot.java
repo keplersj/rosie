@@ -127,8 +127,8 @@ public class Robot extends IterativeRobot {
         // TODO: We may want to set the range parameter on the accelerometer during initialization
         // (AKA: RobotInit) to get better feedback. ie: accel.SetRange(Accelerometer::Range::kRange_2G);
 
-        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, (int) Math.abs((accel_z + accel_x) / 10));
-        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, (int) Math.abs((accel_z + accel_y) / 10));
+        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(accel_z - 1));
+        Robot.oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(accel_z - 1));
 }
 
     /**
