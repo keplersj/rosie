@@ -11,7 +11,6 @@
 
 package org.usfirst.frc5933.ubot.commands;
 
-import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc5933.ubot.Robot;
 
