@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import org.usfirst.frc5933.ubot.Robot;
 
 /**
  *
@@ -91,28 +91,23 @@ public class DriveTrain extends Subsystem {
     	robotDrive.arcadeDrive(stick);
     }
 
-    /**
-     * Takes a joystick input and cubes before sending the values to the robot
-     * @param stick
-     */
-    public void cubicArcadeDrive(Joystick stick) {
-        cubicAracdeDrive(stick.getY(), stick.getX());
-    }
-
-    /**
-     * Takes arcade driving values and cubes them before sending the values to the robot.
-     *
-     * @param move How much the bot is wanted to move.
-     * @param rotate How much the bot is wanted to rotate.
-     */
-    public void cubicAracdeDrive(double move, double rotate) {
-        double newMove = Math.pow(move, 3);
-        double newRotate = Math.pow(rotate, 3);
-        robotDrive.arcadeDrive(newMove, newRotate);
+    public void arcadeDrive(double moveValue, double rotateValue) {
+    	robotDrive.arcadeDrive(moveValue, rotateValue);
     }
 
     public void driveStraight(double speed) {
-    	robotDrive.tankDrive(speed, speed);
+    	double left = speed;
+    	double right = speed;
+    	
+    	if (left < 0) {
+    		left += -0.04;
+    	}
+    	
+    	if (left > 0) {
+    		left += 0.04;
+    	}
+    	
+    	robotDrive.tankDrive(left, right);
     }
 }
 
