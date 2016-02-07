@@ -16,8 +16,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import jaci.openrio.toast.lib.module.IterativeModule;
-import org.usfirst.frc5933.ubot.commands.*;
-import org.usfirst.frc5933.ubot.subsystems.*;
+import org.usfirst.frc5933.ubot.commands.ArcadeDrive;
+import org.usfirst.frc5933.ubot.commands.AutonomousCommand;
+import org.usfirst.frc5933.ubot.subsystems.Arm;
+import org.usfirst.frc5933.ubot.subsystems.DriveTrain;
+import org.usfirst.frc5933.ubot.subsystems.Power;
 
 /**
  * The VM is configured to automatically run this class, and to call the

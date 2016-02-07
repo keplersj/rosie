@@ -36,24 +36,5 @@ dependencies {
     compile group: 'jaci.openrio.toast', name: 'Toast', version: '+'
 }
 
-gradlerio.robotClass = 'org.usfirst.frc5933.ubot.Robot'
 gradlerio.team = "5933" // JudgeMent Call
-
-def robotManifest = {
-  attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
-  attributes 'Robot-Class': gradlerio.robotClass
-}
-
-jar {
-  from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-  manifest robotManifest
-}
-
-task genJavadoc(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
-}
-
-artifacts {
-  archives genJavadoc
-}
+gradlerio.deployFile = "toast/modules/${archivesBaseName}.jar"
