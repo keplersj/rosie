@@ -121,8 +121,8 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
 
         // This code ties the accelerometer on the roborio to the rumble pad on the xbox controller.
-        double accel_x = accel.getX();
-        double accel_y = accel.getY();
+        // double accel_x = accel.getX();
+        // double accel_y = accel.getY();
         double accel_z = accel.getZ();
         
         // TODO: I am sure that comparisons below will need to have a few changes to accurately reflect 
