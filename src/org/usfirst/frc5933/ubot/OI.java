@@ -75,7 +75,7 @@ public class OI {
         startButton = new JoystickButton(xBoxJoystick, 8);
         startButton.whileHeld(new NullCommand());
         backButton = new JoystickButton(xBoxJoystick, 7);
-        backButton.whileHeld(new NullCommand());
+        backButton.whenPressed(new ReverseControls());
         xButton = new JoystickButton(xBoxJoystick, 3);
         xButton.whileHeld(new NullCommand());
         bButton = new JoystickButton(xBoxJoystick, 2);
