@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -44,6 +45,9 @@ public class DriveTrain extends Subsystem {
     public static final double RIGHT_DRIVE_MULTIPLIER = 1.0;
     public static final double LEFT_DRIVE_MULTIPLIER = 1.08;
     
+    public static final double TURBO_FAST_MULTIPLIER = 1.0;
+    public static final double TURBO_SLOW_MULTIPLIER = 0.5;
+    private double turboMultiplier = TURBO_FAST_MULTIPLIER;
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -65,6 +69,10 @@ public class DriveTrain extends Subsystem {
     		y *= -1;
     		x *= -1;
     	}
+
+    	y *= turboMultiplier;
+    	x *= turboMultiplier;
+    	
     	// TODO: if we want the arcade to drive straight, we will need
     	// to scale x by some factor.
     	// I think the best way to do this is to temporarily set x to zero,
@@ -83,11 +91,24 @@ public class DriveTrain extends Subsystem {
     		left *= -1;
     		right *= -1;
     	}
-    		
+    	
+    	left *= turboMultiplier;
+    	right *= turboMultiplier;
+    	
     	robotDrive.tankDrive(left, right);
     }
     
+    public void toggleTurbo() {
+    	if (turboMultiplier == TURBO_FAST_MULTIPLIER) {
+    		turboMultiplier = TURBO_SLOW_MULTIPLIER;
+    	} else {
+    		turboMultiplier = TURBO_FAST_MULTIPLIER;
+    	}
+    }
+    
     public void reverseControls() {
+    	robotDrive.tankDrive(0, 0);
+    	Timer.delay(.25);
     	isReversed = !isReversed;
     }
 }
