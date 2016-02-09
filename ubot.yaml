@@ -451,7 +451,7 @@ Children:
           name: Command
           type: Command
           validators: *id004
-          value: NullCommand
+          value: LiftingArmMove
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id005
           default: whileHeld
@@ -627,6 +627,24 @@ Children:
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: DriveStraight
+  - Children: []
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: &id006 []
+        name: Parameters
+        validators: null
+        value: *id006
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: Arm}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id007 []
+        name: Parameter presets
+        validators: null
+        value: *id007
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: false}
+    Base: Command
+    Name: LiftingArmMove
   Properties: {}
   Base: Commands
   Name: Commands

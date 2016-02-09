@@ -69,7 +69,7 @@ public class OI {
         xBoxJoystick = new Joystick(0);
         
         rightJoystickButton = new JoystickButton(xBoxJoystick, 10);
-        rightJoystickButton.whileHeld(new NullCommand());
+        rightJoystickButton.whileHeld(new LiftingArmMove());
         leftJoystickButton = new JoystickButton(xBoxJoystick, 9);
         leftJoystickButton.whileHeld(new NullCommand());
         startButton = new JoystickButton(xBoxJoystick, 8);
