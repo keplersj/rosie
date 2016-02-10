@@ -79,9 +79,9 @@ public class OI {
         xButton = new JoystickButton(xBoxJoystick, 3);
         xButton.whileHeld(new NullCommand());
         bButton = new JoystickButton(xBoxJoystick, 2);
-        bButton.whileHeld(new NullCommand());
+        bButton.whenPressed(new ToggleReverseSpindle());
         aButton = new JoystickButton(xBoxJoystick, 1);
-        aButton.whileHeld(new NullCommand());
+        aButton.whenPressed(new ToggleForwardSpindle());
         rightBumper = new JoystickButton(xBoxJoystick, 6);
         rightBumper.whileHeld(new LiftingArmDown());
         leftBumper = new JoystickButton(xBoxJoystick, 5);
