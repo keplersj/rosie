@@ -11,9 +11,10 @@
 
 package org.usfirst.frc5933.ubot.subsystems;
 
+import org.usfirst.frc5933.ubot.Robot;
 import org.usfirst.frc5933.ubot.RobotMap;
-import org.usfirst.frc5933.ubot.commands.*;
-import edu.wpi.first.wpilibj.Jaguar;
+
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SpeedController;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -51,6 +52,11 @@ public class Arm extends Subsystem {
     	windowMotor.set(1);
     }
 
+    public void joystickMove() {
+    	double value = Robot.oi.getXBoxJoystick().getRawAxis(5);
+    	windowMotor.set(value);
+    }
+    
     public void down() {
     	windowMotor.set(-1);
     }
@@ -60,17 +66,36 @@ public class Arm extends Subsystem {
     }
     
     public boolean isStopped() {
-    	boolean stopped = windowMotor.get() == 0; 
-    	if (stopped) {
-    		// TODO: not working
-    		System.out.println("arm stopped: ");
-    		System.out.println(windowMotor.get());
+    	
+    	// TODO: This code is commented out until we figure out why the jaguar 
+    	// kills the can bus. We really want to use the can bus, since can get more info
+    	// from the speed controller than if we only used PWM. Some of these methods only exist
+    	// if we use the CAN bus, so we will remove them for now.
+    	
+    	// if true the motor can turn.
+    	/*    	
+  		boolean forward_limit = windowMotor.getForwardLimitOK();
+    	boolean reverse_limit = windowMotor.getReverseLimitOK();
+    	double speed = windowMotor.get();
+    	
+    	if (speed == 0) {
+    		System.out.println("Motor is stopped since speed is zero");
+    		return true;
     	}
-    	else {
-    		System.out.println("arm running: ");
-    		System.out.println(windowMotor.get());
+    	
+    	if (!forward_limit && (speed != 0)) {
+    		System.out.println("Motor stopped by forward limit switch");
+    		stop();
+    		return true;
     	}
-    	return stopped;
+    	
+    	if (!reverse_limit && (speed != 0)) {
+    		System.out.println("Motor stopped by reverse limit switch");
+    		stop();
+    		return true;
+    	}
+    	*/    	
+    	return false;
     }
 }
 
