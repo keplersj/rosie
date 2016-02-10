@@ -108,7 +108,7 @@ public class DriveTrain extends Subsystem {
     
     public void reverseControls() {
     	robotDrive.tankDrive(0, 0);
-    	Timer.delay(.25);
+    	Timer.delay(1.0);
     	isReversed = !isReversed;
     }
 }
