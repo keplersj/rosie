@@ -111,5 +111,9 @@ public class DriveTrain extends Subsystem {
     	Timer.delay(1.0);
     	isReversed = !isReversed;
     }
+    
+    public void turnDegrees(double speed, double degrees) {
+    	robotDrive.arcadeDrive(speed, degrees);
+    }
 }
 
