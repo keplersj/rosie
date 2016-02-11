@@ -77,6 +77,7 @@ public class Robot extends IterativeRobot {
         server.setQuality(100);
         server.setSize(0);
         server.startAutomaticCapture("cam0");
+        server.startAutomaticCapture("cam1");
         
     }
 
