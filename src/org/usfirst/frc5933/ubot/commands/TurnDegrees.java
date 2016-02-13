@@ -40,11 +40,12 @@ public class TurnDegrees extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.driveTrain.turnDegrees( 0.5 , 90 );
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.turnDegrees( 0.5 , 90 );
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
