@@ -123,5 +123,57 @@ public class DriveTrain extends Subsystem {
 		}
 		robotDrive.stopMotor();
     }
-}
 
+    /**
+        aligns the robot to 0 degrees, which would be the starting orientation
+        @param speed 
+        inputs the speed at which to turn
+    **/
+    public void alignZeroDegrees(double speed){
+
+        double degreesToTurn = gyro.getAngle() %  360;
+        int amountOfRotations = (int) gyro.getAngle / 360;
+
+        if(degreesToTurn < 180){
+            while(amountOfRotations == (int) (gyro.getAngle / 360)){
+                    RobotDrive.drive(speed, 1);
+                    degreesToTurn = gyro.getAngle() %  360;
+            }
+        } else if(degreesToTurn > 180){
+            while(amountOfRotations == (int) (gyro.getAngle() / 360)){
+                while(degreesToTurn < 0){
+                    RobotDrive.drive(speed, -1);
+                    degreesToTurn = gyro.getAngle() %  360;
+                }
+            }
+        }
+    }
+
+    /**
+        aligns the robot to 180 degrees, which is facing the opposite of starting position
+        @param speed
+        inputs the speed at which to turn
+    **/
+    public void align180Degrees(double speed){
+        double degreesToTurn = gyro.getAngle() % 360;
+
+        if(degreesToTurn < 180){
+
+            while(degreesToTurn < 180){
+                RobotDrive.drive(speed, -1);
+                degreesToTurn = gyro.getAngle() %  360;
+            }
+
+        } else if(degreesToTurn > 180){
+
+            while(degreesToTurn > 180){
+                RobotDrive.drive(speed, 1);
+                degreesToTurn = gyro.getAngle() %  360;
+            }
+
+        }
+    }
+
+
+    
+}
