@@ -11,14 +11,10 @@
 
 package org.usfirst.frc5933.ubot.subsystems;
 
+import edu.wpi.first.wpilibj.*;
+import org.usfirst.frc5933.ubot.CameraFeeds;
 import org.usfirst.frc5933.ubot.RobotMap;
 import org.usfirst.frc5933.ubot.commands.*;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Victor;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc5933.ubot.Robot;
@@ -48,6 +44,8 @@ public class DriveTrain extends Subsystem {
     public static final double TURBO_FAST_MULTIPLIER = 1.0;
     public static final double TURBO_SLOW_MULTIPLIER = 0.5;
     private double turboMultiplier = TURBO_FAST_MULTIPLIER;
+
+	private static CameraFeeds feeds = new CameraFeeds();
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -110,6 +108,20 @@ public class DriveTrain extends Subsystem {
     	robotDrive.tankDrive(0, 0);
     	Timer.delay(1.0);
     	isReversed = !isReversed;
+    }
+    
+    public void turnDegrees(double speed, double degrees) {
+		AnalogGyro gyro = RobotMap.sensorsAnalogGyro;
+		gyro.reset();
+		double current = gyro.getAngle();
+		System.out.println("Hello from Rotation.");
+		System.out.println("Starting: " + current);
+		while (current < 90) {
+			current = gyro.getAngle();
+			robotDrive.drive(speed, -1);
+			System.out.println("Current Angle: " + current);
+		}
+		robotDrive.stopMotor();
     }
 }
 
