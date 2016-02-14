@@ -130,19 +130,20 @@ public class DriveTrain extends Subsystem {
         inputs the speed at which to turn
     **/
     public void alignZeroDegrees(double speed){
+		AnalogGyro gyro = RobotMap.sensorsAnalogGyro;
 
         double degreesToTurn = gyro.getAngle() %  360;
-        int amountOfRotations = (int) gyro.getAngle / 360;
+        int amountOfRotations = (int) gyro.getAngle() / 360;
 
         if(degreesToTurn < 180){
-            while(amountOfRotations == (int) (gyro.getAngle / 360)){
-                    RobotDrive.drive(speed, 1);
+            while(amountOfRotations == (int) (gyro.getAngle() / 360)){
+                    robotDrive.drive(speed, 1);
                     degreesToTurn = gyro.getAngle() %  360;
             }
         } else if(degreesToTurn > 180){
             while(amountOfRotations == (int) (gyro.getAngle() / 360)){
                 while(degreesToTurn < 0){
-                    RobotDrive.drive(speed, -1);
+                    robotDrive.drive(speed, -1);
                     degreesToTurn = gyro.getAngle() %  360;
                 }
             }
@@ -155,19 +156,20 @@ public class DriveTrain extends Subsystem {
         inputs the speed at which to turn
     **/
     public void align180Degrees(double speed){
+		AnalogGyro gyro = RobotMap.sensorsAnalogGyro;
         double degreesToTurn = gyro.getAngle() % 360;
 
         if(degreesToTurn < 180){
 
             while(degreesToTurn < 180){
-                RobotDrive.drive(speed, -1);
+                robotDrive.drive(speed, -1);
                 degreesToTurn = gyro.getAngle() %  360;
             }
 
         } else if(degreesToTurn > 180){
 
             while(degreesToTurn > 180){
-                RobotDrive.drive(speed, 1);
+                robotDrive.drive(speed, 1);
                 degreesToTurn = gyro.getAngle() %  360;
             }
 
