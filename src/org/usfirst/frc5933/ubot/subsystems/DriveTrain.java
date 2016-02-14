@@ -12,7 +12,6 @@
 package org.usfirst.frc5933.ubot.subsystems;
 
 import edu.wpi.first.wpilibj.*;
-import org.usfirst.frc5933.ubot.CameraFeeds;
 import org.usfirst.frc5933.ubot.RobotMap;
 import org.usfirst.frc5933.ubot.commands.*;
 
@@ -45,8 +44,6 @@ public class DriveTrain extends Subsystem {
     public static final double TURBO_SLOW_MULTIPLIER = 0.5;
     private double turboMultiplier = TURBO_FAST_MULTIPLIER;
 
-	private static CameraFeeds feeds = new CameraFeeds();
-    
 	private AnalogGyro gyro_ = RobotMap.sensorsAnalogGyro;
 
 	// Put methods for controlling this subsystem
