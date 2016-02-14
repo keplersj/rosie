@@ -309,7 +309,7 @@ Children:
           name: Command
           type: Command
           validators: *id007
-          value: ToggleForwardSpindle
+          value: NullCommand
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id008
           default: whileHeld
@@ -338,7 +338,7 @@ Children:
           name: Command
           type: Command
           validators: *id007
-          value: ToggleReverseSpindle
+          value: NullCommand
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id008
           default: whileHeld
@@ -724,14 +724,14 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: DriveTrain}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id009
+        default: []
+        name: Parameter presets
+        validators: null
+        value:
         - !!robotbuilder.data.properties.ParameterSet
           name: default
           parameters:
           - {name: degrees, type: double, value: '0'}
-        name: Parameter presets
-        validators: null
-        value: *id009
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command

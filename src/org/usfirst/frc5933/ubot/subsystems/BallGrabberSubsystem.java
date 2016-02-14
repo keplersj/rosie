@@ -51,6 +51,18 @@ public class BallGrabberSubsystem extends Subsystem {
         // setDefaultCommand(new MySpecialCommand());
     }
 
+    public void runForward() {
+    	spindleMotor.set(-.5);
+    }
+    
+    public void runBackward() {
+    	spindleMotor.set(.5);
+    }
+    
+    public void stop() {
+    	spindleMotor.set(0);
+    }
+    
     public void toggleForward() {
     	if (isRunningReverse)
     		return;
