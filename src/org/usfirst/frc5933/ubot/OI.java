@@ -90,7 +90,6 @@ public class OI {
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("ArcadeDrive", new ArcadeDrive());
         SmartDashboard.putData("LiftingArmUp", new LiftingArmUp());
         SmartDashboard.putData("LiftingArmDown", new LiftingArmDown());
         SmartDashboard.putData("DriveOverBarriers: LowBarPreset", new DriveOverBarriers(false, false, false, false, false, false, false, false, true));
