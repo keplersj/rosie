@@ -91,6 +91,21 @@ public class DriveTrain extends Subsystem {
     }
 
     public void driveStraight(double speed) {
+
+    	// Output the number of idx rises. I think we can use this to determine
+    	// the number revolutions and correlate that to inches. We will see....
+    	// We may need to use one of the counter classes in the wpilib ....
+    	
+    	int flm = frontLeftMotor.getNumberOfQuadIdxRises();
+    	int rlm = rearLeftMotor.getNumberOfQuadIdxRises();
+        int frm = frontRightMotor.getNumberOfQuadIdxRises();
+        int rrm = rearRightMotor.getNumberOfQuadIdxRises();
+    	
+        System.out.println("FLM: " + flm);
+        System.out.println("RLM: " + rlm);
+        System.out.println("FRM: " + frm);
+        System.out.println("RRM: " + rrm);
+        
     	double left = speed * LEFT_DRIVE_MULTIPLIER;
     	double right = speed * RIGHT_DRIVE_MULTIPLIER;
     	
