@@ -45,6 +45,8 @@ public class DriveTrain extends Subsystem {
     private double turboMultiplier = TURBO_FAST_MULTIPLIER;
 
 	private AnalogGyro gyro_ = RobotMap.sensorsAnalogGyro;
+	
+	public static final int TURN_MAX_TRIES = 1000;
 
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -143,17 +145,29 @@ public class DriveTrain extends Subsystem {
 		double startingAngle = gyro_.getAngle();
 		double now = startingAngle;
 		double desired = now;
+		int tries = TURN_MAX_TRIES;
+		
 		if (degrees > 0) {
 			desired = now + degrees;
 			do {
 				robotDrive.tankDrive(-speed, speed);
 				now = gyro_.getAngle();
+				--tries;
+				if (tries == 0) {
+					System.err.println("Failed to turn specified degrees.");
+					break;
+				}
 			} while (now < desired);
 		} else {
 			desired = now - degrees;
 			do {
 				robotDrive.tankDrive(speed, -speed);
 				now = gyro_.getAngle();
+				--tries;
+				if (tries == 0) {
+					System.err.println("Failed to turn specified degrees.");
+					break;
+				}
 			} while (now > startingAngle + degrees);
 		}
 		
@@ -166,19 +180,30 @@ public class DriveTrain extends Subsystem {
         inputs the speed at which to turn
     **/
     public void alignZeroDegrees(double speed){
+		int tries = TURN_MAX_TRIES;
         double degreesToTurn = gyro_.getAngle() %  360;
         int amountOfRotations = (int) gyro_.getAngle() / 360;
 
-        if(degreesToTurn < 180){
-            while(amountOfRotations == (int) (gyro_.getAngle() / 360)){
+        if (degreesToTurn < 180) {
+            while (amountOfRotations == (int) (gyro_.getAngle() / 360)) {
                     robotDrive.drive(speed, 1);
                     degreesToTurn = gyro_.getAngle() %  360;
+    				--tries;
+    				if (tries == 0) {
+    					System.err.println("Failed to turn align to zero degrees.");
+    					break;
+    				}
             }
-        } else if(degreesToTurn > 180){
-            while(amountOfRotations == (int) (gyro_.getAngle() / 360)){
-                while(degreesToTurn < 0){
+        } else if (degreesToTurn > 180) {
+            while (amountOfRotations == (int) (gyro_.getAngle() / 360)) {
+                while (degreesToTurn < 0) {
                     robotDrive.drive(speed, -1);
                     degreesToTurn = gyro_.getAngle() %  360;
+    				--tries;
+    				if (tries == 0) {
+    					System.err.println("Failed to turn align to zero degrees.");
+    					break;
+    				}
                 }
             }
         }
@@ -189,23 +214,31 @@ public class DriveTrain extends Subsystem {
         @param speed
         inputs the speed at which to turn
     **/
-    public void align180Degrees(double speed){
+    public void align180Degrees(double speed) {
         double degreesToTurn = gyro_.getAngle() % 360;
+		int tries = TURN_MAX_TRIES;
 
-        if(degreesToTurn < 180){
-
-            while(degreesToTurn < 180){
+        if (degreesToTurn < 180) {
+            while(degreesToTurn < 180) {
                 robotDrive.drive(speed, -1);
                 degreesToTurn = gyro_.getAngle() %  360;
+				--tries;
+				if (tries == 0) {
+					System.err.println("Failed to turn align to 180 degrees.");
+					break;
+				}
             }
+        } else if (degreesToTurn > 180) {
 
-        } else if(degreesToTurn > 180){
-
-            while(degreesToTurn > 180){
+            while (degreesToTurn > 180) {
                 robotDrive.drive(speed, 1);
                 degreesToTurn = gyro_.getAngle() %  360;
+				--tries;
+				if (tries == 0) {
+					System.err.println("Failed to turn align to 180 degrees.");
+					break;
+				}
             }
-
         }
     }
 }
