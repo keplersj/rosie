@@ -90,6 +90,10 @@ public class DriveTrain extends Subsystem {
     	robotDrive.arcadeDrive(y, x);
     }
 
+    public void stop() {
+		robotDrive.stopMotor();
+    }
+    
     public void driveStraight(double speed) {
 
     	// Output the number of idx rises. I think we can use this to determine
@@ -153,7 +157,7 @@ public class DriveTrain extends Subsystem {
 			} while (now > startingAngle + degrees);
 		}
 		
-		robotDrive.stopMotor();
+		stop();
     }
 
     /**

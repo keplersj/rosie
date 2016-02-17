@@ -252,7 +252,7 @@ public class RiptServer {
 
 	/**
 	 * check if auto capture is started
-	 *
+	 * @return auto capture started
 	 */
 	public synchronized boolean isAutoCaptureStarted() {
 		return m_autoCaptureStarted;

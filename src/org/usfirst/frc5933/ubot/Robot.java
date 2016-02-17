@@ -143,13 +143,19 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        rumble();
-        turnSpindle();
+        rumbleInYourPants();
+        turnSpindleIfNeeded();
         if (arcadeDrive != null) arcadeDrive.start();
 
     }
 
-    public void turnSpindle() {
+    public void moveArmIfNeeded() {
+        if (Robot.oi.getXBoxJoystick().getRawButton(5)) {
+        	Robot.arm.joystickMove();
+        }
+    }
+    
+    public void turnSpindleIfNeeded() {
     	if (Robot.oi.getAButton().get()) {
     		Robot.ballGrabberSubsystem.runForward();
     	} else if (Robot.oi.getBButton().get()) {
@@ -163,7 +169,7 @@ public class Robot extends IterativeRobot {
     /**
      * Takes the Z Axis of the RoboRIO accelerometer, and passes it to the Joystick for haptic feedback of the robot.
      */
-    public void rumble() {
+    public void rumbleInYourPants() {
         double accel_z = accel.getZ();
 
         Robot.oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(accel_z - 1));
