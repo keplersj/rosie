@@ -52,110 +52,137 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 
         switch (startingPosition) {
         	case 1: {
-        		//Low bar, path to Lower Window 1
+        		if (lowerWindowPosition == 1) {
+        			//Low bar, path to Lower Window 1
         		
-        		double l1 = 210;
-        		double l2 = 146;
-        		double dg = 133;
+        			double l1 = 210;
+        			double l2 = 146;
+        			double dg = 133;
         		
-        		if (barrierNumber == 2) {
-        			l1 +=10;
+        			if (barrierNumber == 2) {
+        				l1 +=10;
+        			}
+        		
+        			addSequential(new DriveStraight(l1)); // TODO: The inches are not right
+        			addSequential(new TurnDegrees(dg)); // TODO: The degrees are not right
+        			addSequential(new DriveStraight(l2)); // TODO: The inches are not right
+        			addSequential(new ToggleReverseSpindle());
+        		} else {
+        			
         		}
-        		
-        		addSequential(new DriveStraight(l1)); // TODO: The inches are not right
-                addSequential(new TurnDegrees(dg)); // TODO: The degrees are not right
-                addSequential(new DriveStraight(l2)); // TODO: The inches are not right
-                addSequential(new ToggleReverseSpindle());
         	} break;
         	case 2: {
-        		//Barrier 2 to Lower Window 1
+        		if (lowerWindowPosition == 1) {
+        			//Barrier 2 to Lower Window 1
         		
-        		double l1 = 239;
-        		double l2 = 105;
-        		double dg = 133;
+        			double l1 = 239;
+        			double l2 = 105;
+        			double dg = 133;
         		
-        		if (barrierNumber == 2) {
-        			l1 +=10;
+        			if (barrierNumber == 2) {
+        				l1 +=10;
+        			}
+        		
+        			addSequential(new DriveStraight(l1)); // TODO: The inches are not right
+        			addSequential(new TurnDegrees(dg)); // TODO: The degrees are not right
+        			addSequential(new DriveStraight(l2)); // TODO: The inches are not right
+        			addSequential(new ToggleReverseSpindle());
+        		} else {
+        			
         		}
-        		
-        		addSequential(new DriveStraight(l1)); // TODO: The inches are not right
-                addSequential(new TurnDegrees(dg)); // TODO: The degrees are not right
-                addSequential(new DriveStraight(l2)); // TODO: The inches are not right
-                addSequential(new ToggleReverseSpindle());
         	} break;
         	case 3: {
-        		//Barrier 3 to Lower Window 1
+        		if (lowerWindowPosition == 1) {
+        			//Barrier 3 to Lower Window 1
         		
-        		double l1 = 232;
-        		double l2 = 68;
-        		double l3 = 101;
-        		double dg1 = 127;
-        		double dg2 = 80;
+        			double l1 = 232;
+        			double l2 = 68;
+        			double l3 = 101;
+        			double dg1 = 127;
+        			double dg2 = 80;
         		
-        		if (barrierNumber == 2) {
-        			l1 +=10;
-        		}
+        			if (barrierNumber == 2) {
+        				l1 +=10;
+        			}
         		
-        		addSequential(new DriveStraight(l1)); // TODO: The inches are not right
-                addSequential(new TurnDegrees(dg1)); // TODO: The degrees are not right
-                addSequential(new DriveStraight(l2)); // TODO: The inches are not right
-                addSequential(new TurnDegrees(dg2)); // TODO: The degrees are not right
-                addSequential(new DriveStraight(l3)); // TODO: The inches are not right
-                addSequential(new ToggleReverseSpindle());
+        			addSequential(new DriveStraight(l1)); // TODO: The inches are not right
+        			addSequential(new TurnDegrees(dg1)); // TODO: The degrees are not right
+        			addSequential(new DriveStraight(l2)); // TODO: The inches are not right
+        			addSequential(new TurnDegrees(dg2)); // TODO: The degrees are not right
+        			addSequential(new DriveStraight(l3)); // TODO: The inches are not right
+        			addSequential(new ToggleReverseSpindle());
+        	} else {
+        		
+        	}
         	} break;
         	case 4: {
-        		double l1 = 170;
-        		double l2 = 110;
-        		double l3 = 90;
-        		double dg1 = 135;
-        		double dg2 = ;
+        		if (lowerWindowPosition == 1) {
+        			//Barrier 4 to Lower Window 1
         		
-        		if (barrierNumber == 2) {
-        			l1 += 10;
-        		}
+        			double l1 = 170;
+        			double l2 = 110;
+        			double l3 = 90;
+        			double dg1 = 135;
+        			double dg2 = ;
         		
-                addSequential(new DriveStraight(l1)); 
-                addSequential(new TurnDegrees(d1g)); 
-                addSequential(new DriveStraight(l2)); 
-                addSequential(new TurnDegrees(dg2));
-                addSequential(new DriveStraight(l3));
-                addSequential(new ToggleReverseSpindle());
+        			if (barrierNumber == 2) {
+        				l1 += 10;
+        			}
+        		
+        			addSequential(new DriveStraight(l1)); 
+        			addSequential(new TurnDegrees(dg1)); 
+        			addSequential(new DriveStraight(l2)); 
+        			addSequential(new TurnDegrees(dg2));
+        			addSequential(new DriveStraight(l3));
+        			addSequential(new ToggleReverseSpindle());
+        	} else {
+        		
+        	}
         	} break;
         	case 5: {
-        		double l1 = 200;
-        		double l2 = 200;
-        		double l3 = 170;
-        		double dg1 = 90;
-        		double dg2 = 135;
+        		if (lowerWindowPosition == 1)
+        			//Barrier 5 to Lower Window 1
+        			double l1 = 200;
+        			double l2 = 200;
+        			double l3 = 170;
+        			double dg1 = 90;
+        			double dg2 = 135;
         		
-        		if (barrierNumber == 2) {
-        			l1 += 10;
-        		}
+        			if (barrierNumber == 2) {
+        				l1 += 10;
+        			}
         		
-                addSequential(new DriveStraight(l1)); 
-                addSequential(new TurnDegrees(d1g)); 
-                addSequential(new DriveStraight(l2)); 
-                addSequential(new TurnDegrees(dg2));
-                addSequential(new DriveStraight(l3));
-                addSequential(new ToggleReverseSpindle());
-        
+        			addSequential(new DriveStraight(l1)); 
+        			addSequential(new TurnDegrees(dg1)); 
+        			addSequential(new DriveStraight(l2)); 
+        			addSequential(new TurnDegrees(dg2));
+        			addSequential(new DriveStraight(l3));
+        			addSequential(new ToggleReverseSpindle());
+        	} else {
+        		
+        	}	
         	} break;
         	default: {
-        		double l1 = 60;
-        		double l2 = 110;
-        		double dg1 = 45;
-        		double dg2 = 90;
+        		if (lowerWindowPosition == 1) {
+        			//Spy Box to Lower Window 1
+        			double l1 = 60;
+        			double l2 = 110;
+        			double dg1 = 45;
+        			double dg2 = 90;
         		
-        		if (barrierNumber == 2) {
-        			l1 += 10;
-        		}
+        			if (barrierNumber == 2) {
+        				l1 += 10;
+        			}
         		
-                addSequential(new TurnDegrees(d1g)); //May have to initially turn 
-                addSequential(new DriveStraight(l1)); 
-                addSequential(new TurnDegrees(dg2));
-                addSequential(new DriveStraight(l2)); 
-                addSequential(new ToggleReverseSpindle());
-        	} break;
+        			addSequential(new TurnDegrees(dg1)); //May have to initially turn 
+        			addSequential(new DriveStraight(l1)); 
+        			addSequential(new TurnDegrees(dg2));
+        			addSequential(new DriveStraight(l2)); 
+        			addSequential(new ToggleReverseSpindle());
+        		} else {
+        			
+        		}	
+        	} break {
         }
     } 
 }
