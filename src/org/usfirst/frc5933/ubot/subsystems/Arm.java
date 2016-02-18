@@ -52,8 +52,11 @@ public class Arm extends Subsystem {
     	windowMotor.set(1);
     }
 
-    public void joystickMove() {
+    public void joystickMove(boolean useJoystick2) {
     	double value = Robot.oi.getXBoxJoystick().getRawAxis(5);
+    	if (useJoystick2) {
+    		value = Robot.oi.getXBoxJoystick2().getRawAxis(5);
+    	}
     	windowMotor.set(value);
     }
     

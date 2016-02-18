@@ -115,9 +115,11 @@ public class Robot extends IterativeRobot {
      * This function is called when the disabled button is hit.
      * You can use it to reset subsystems before shutting down.
      */
-    public void disabledInit(){
+    public void disabledInit() {
         oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, 0);
         oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, 0);
+        oi.getXBoxJoystick2().setRumble(RumbleType.kLeftRumble, 0);
+        oi.getXBoxJoystick2().setRumble(RumbleType.kRightRumble, 0);
     }
 
     public void disabledPeriodic() {
@@ -158,14 +160,17 @@ public class Robot extends IterativeRobot {
 
     public void moveArmIfNeeded() {
         if (Robot.oi.getXBoxJoystick().getRawButton(5)) {
-        	Robot.arm.joystickMove();
+        	Robot.arm.joystickMove(false);
+        }
+        if (Robot.oi.getXBoxJoystick2().getRawButton(5)) {
+        	Robot.arm.joystickMove(true);
         }
     }
     
     public void turnSpindleIfNeeded() {
-    	if (Robot.oi.getAButton().get()) {
+    	if (Robot.oi.getAButton().get() || Robot.oi.getAButton2().get()) {
     		Robot.ballGrabberSubsystem.runForward();
-    	} else if (Robot.oi.getBButton().get()) {
+    	} else if (Robot.oi.getBButton().get() || Robot.oi.getBButton2().get()) {
     		Robot.ballGrabberSubsystem.runBackward();
     	} else {
     		Robot.ballGrabberSubsystem.stop();
@@ -181,6 +186,8 @@ public class Robot extends IterativeRobot {
 
         Robot.oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(accel_z - 1));
         Robot.oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(accel_z - 1));
+        Robot.oi.getXBoxJoystick2().setRumble(RumbleType.kLeftRumble, (float) Math.abs(accel_z - 1));
+        Robot.oi.getXBoxJoystick2().setRumble(RumbleType.kRightRumble, (float) Math.abs(accel_z - 1));
     }
 
     /**
