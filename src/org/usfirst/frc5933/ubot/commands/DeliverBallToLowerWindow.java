@@ -52,18 +52,7 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 
         switch (startingPosition) {
         	case 1: {
-        		double l1 = 100;
-        		double l2= 100;
-        		double dg = 45;
         		
-        		if (barrierNumber == 2) {
-        			l1 += 10;
-        		}
-        		
-                addSequential(new DriveStraight(l1)); // TODO: The inches are not right
-                addSequential(new TurnDegrees(dg)); // TODO: The degrees are not right
-                addSequential(new DriveStraight(l2)); // TODO: The inches are not right
-                addSequential(new ToggleReverseSpindle());
         	} break;
         	case 2: {
         		// TODO: Fill this in with the needed sequence
@@ -72,13 +61,57 @@ public class DeliverBallToLowerWindow extends CommandGroup {
         		// TODO: Fill this in with the needed sequence
         	} break;
         	case 4: {
-        		// TODO: Fill this in with the needed sequence
+        		double l1 = 170;
+        		double l2 = 110;
+        		double l3 = 90;
+        		double dg1 = 135;
+        		double dg2 = ;
+        		
+        		if (barrierNumber == 2) {
+        			l1 += 10;
+        		}
+        		
+                addSequential(new DriveStraight(l1)); 
+                addSequential(new TurnDegrees(d1g)); 
+                addSequential(new DriveStraight(l2)); 
+                addSequential(new TurnDegrees(dg2));
+                addSequential(new DriveStraight(l3));
+                addSequential(new ToggleReverseSpindle());
         	} break;
         	case 5: {
-        		// TODO: Fill this in with the needed sequence
+        		double l1 = 200;
+        		double l2 = 200;
+        		double l3 = 170;
+        		double dg1 = 90;
+        		double dg2 = 135;
+        		
+        		if (barrierNumber == 2) {
+        			l1 += 10;
+        		}
+        		
+                addSequential(new DriveStraight(l1)); 
+                addSequential(new TurnDegrees(d1g)); 
+                addSequential(new DriveStraight(l2)); 
+                addSequential(new TurnDegrees(dg2));
+                addSequential(new DriveStraight(l3));
+                addSequential(new ToggleReverseSpindle());
+        
         	} break;
         	default: {
-        		// TODO: Fill this in with the needed sequence
+        		double l1 = 60;
+        		double l2 = 110;
+        		double dg1 = 45;
+        		double dg2 = 90;
+        		
+        		if (barrierNumber == 2) {
+        			l1 += 10;
+        		}
+        		
+                addSequential(new TurnDegrees(d1g)); //May have to initially turn 
+                addSequential(new DriveStraight(l1)); 
+                addSequential(new TurnDegrees(dg2));
+                addSequential(new DriveStraight(l2)); 
+                addSequential(new ToggleReverseSpindle());
         	} break;
         }
     } 
