@@ -56,9 +56,11 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 
         switch (startingPosition) {
         	case 1: {
-        		double l1 = 100;
-        		double l2= 100;
-        		double dg = 45;
+        		//Low bar, path to Lower Window 1
+        		
+        		double l1 = 210;
+        		double l2 = 146;
+        		double dg = 133;
         		
         		if (barrierNumber == 2) {
         			l1 += 10;
@@ -70,10 +72,40 @@ public class DeliverBallToLowerWindow extends CommandGroup {
                 addSequential(new ToggleReverseSpindle());
         	} break;
         	case 2: {
-        		// TODO: Fill this in with the needed sequence
+        		//Barrier 2 to Lower Window 1
+        		
+        		double l1 = 239;
+        		double l2 = 105;
+        		double dg = 133;
+        		
+        		if (barrierNumber == 2) {
+        			l1 +=10;
+        		}
+        		
+        		addSequential(new DriveStraight(l1)); // TODO: The inches are not right
+                addSequential(new TurnDegrees(dg)); // TODO: The degrees are not right
+                addSequential(new DriveStraight(l2)); // TODO: The inches are not right
+                addSequential(new ToggleReverseSpindle());
         	} break;
         	case 3: {
-        		// TODO: Fill this in with the needed sequence
+        		//Barrier 3 to Lower Window 1
+        		
+        		double l1 = 232;
+        		double l2 = 68;
+        		double l3 = 101;
+        		double dg1 = 127;
+        		double dg2 = 80;
+        		
+        		if (barrierNumber == 2) {
+        			l1 +=10;
+        		}
+        		
+        		addSequential(new DriveStraight(l1)); // TODO: The inches are not right
+                addSequential(new TurnDegrees(dg1)); // TODO: The degrees are not right
+                addSequential(new DriveStraight(l2)); // TODO: The inches are not right
+                addSequential(new TurnDegrees(dg2)); // TODO: The degrees are not right
+                addSequential(new DriveStraight(l3)); // TODO: The inches are not right
+                addSequential(new ToggleReverseSpindle());
         	} break;
         	case 4: {
         		// TODO: Fill this in with the needed sequence
