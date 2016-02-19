@@ -72,9 +72,9 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 		if (lowerWindowPosition == 1) {
 			//Low bar, path to Lower Window 1
 
-			double l1 = 210;
-			double l2 = 146;
-			double dg = 133;
+			double l1 = 22.25 * 12; //Inches
+			double dg = 132; //Degrees
+			double l2 = 15.375 * 12; //Inches
 
 			if (barrierNumber == 2) {
 				l1 +=10;
@@ -92,9 +92,9 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 		if (lowerWindowPosition == 1) {
 			//Barrier 2 to Lower Window 1
 
-			double l1 = 239;
-			double l2 = 105;
-			double dg = 133;
+			double l1 = 26 * 12; //Inches
+			double dg = 132; //Degrees
+			double l2 = 10.375 * 12; //Inches
 
 			if (barrierNumber == 2) {
 				l1 +=10;
@@ -112,11 +112,11 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 		if (lowerWindowPosition == 1) {
 			//Barrier 3 to Lower Window 1
 
-			double l1 = 232;
-			double l2 = 68;
-			double l3 = 101;
-			double dg1 = 127;
-			double dg2 = 80;
+			double l1 = 20.5 * 12; //Inches
+			double dg1 = 50; //Degrees
+			double l2 = 7.25 * 12; //Inches
+			double dg2 = 109; //Degrees
+			double l3 = 10.5 * 12; //Inches
 
 			if (barrierNumber == 2) {
 				l1 +=10;
@@ -136,11 +136,11 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 		if (lowerWindowPosition == 1) {
 			//Barrier 4 to Lower Window 1
 
-			double l1 = 170;
-			double l2 = 110;
-			double l3 = 90;
-			double dg1 = 135;
-			double dg2 = 4; // TODO:  What should this value be ??? I shoved the value 4 in to get it to compile.
+			double l1 = 18.125 * 12; //Inches
+			double dg1 = 55; //Degrees
+			double l2 = 11.75 * 12; //Inches
+			double dg2 = 109; //Degrees
+			double l3 = 10.5 * 12; //Inches
 
 			if (barrierNumber == 2) {
 				l1 += 10;
@@ -159,11 +159,11 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 		double path5Speed = -0.5;
 		if (lowerWindowPosition == 1) {
 			//Barrier 5 to Lower Window 1
-			double l1 = 200;
-			double l2 = 200;
-			double l3 = 170;
-			double dg1 = 90;
-			double dg2 = 135;
+			double l1 = 25.375 * 12; //Inches
+			double dg1 = 75; //Degrees
+			double l2 = 15.5 * 12; //Inches
+			double dg2 = 130; //Degrees
+			double l3 = 10.5 * 12; //Inches
 
 			if (barrierNumber == 2) {
 				l1 += 10;
