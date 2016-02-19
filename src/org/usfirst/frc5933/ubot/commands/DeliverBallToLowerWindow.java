@@ -84,7 +84,6 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 			addSequential(new TurnDegrees(path1Speed, dg)); // TODO: The degrees are not right
 			addSequential(new DriveStraight(path1Speed, l2)); // TODO: The inches are not right
 			addSequential(new ToggleReverseSpindle());
-		} else {
 		}
 	}
 	
@@ -105,7 +104,6 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 			addSequential(new TurnDegrees(path2Speed, dg)); // TODO: The degrees are not right
 			addSequential(new DriveStraight(path2Speed, l2)); // TODO: The inches are not right
 			addSequential(new ToggleReverseSpindle());
-		} else {
 		}
 	}
 	
@@ -130,7 +128,6 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 			addSequential(new TurnDegrees(path3Speed, dg2)); // TODO: The degrees are not right
 			addSequential(new DriveStraight(path3Speed, l3)); // TODO: The inches are not right
 			addSequential(new ToggleReverseSpindle());
-		} else {
 		}
 	}
 
@@ -155,7 +152,6 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 			addSequential(new TurnDegrees(path4Speed, dg2));
 			addSequential(new DriveStraight(path4Speed, l3));
 			addSequential(new ToggleReverseSpindle());
-		} else {
 		}
 	}
 
@@ -179,8 +175,7 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 			addSequential(new TurnDegrees(path5Speed, dg2));
 			addSequential(new DriveStraight(path5Speed, l3));
 			addSequential(new ToggleReverseSpindle());
-		} else {
-		}	
+		}
 	}
 
 	public void doPath6(int startingPosition, int barrierNumber, int lowerWindowPosition) {
@@ -201,7 +196,6 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 			addSequential(new TurnDegrees(path6Speed, dg2));
 			addSequential(new DriveStraight(path6Speed, l2)); 
 			addSequential(new ToggleReverseSpindle());
-		} else {
-		}	
+		}
 	}
 }
