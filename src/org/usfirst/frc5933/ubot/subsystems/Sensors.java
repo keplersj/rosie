@@ -11,10 +11,9 @@
 
 package org.usfirst.frc5933.ubot.subsystems;
 
-import org.usfirst.frc5933.ubot.RobotMap;
 import edu.wpi.first.wpilibj.AnalogGyro;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc5933.ubot.RobotMap;
 
 
 /**

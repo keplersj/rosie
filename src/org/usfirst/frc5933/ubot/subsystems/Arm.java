@@ -11,13 +11,10 @@
 
 package org.usfirst.frc5933.ubot.subsystems;
 
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc5933.ubot.Robot;
 import org.usfirst.frc5933.ubot.RobotMap;
-
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.SpeedController;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 /**
