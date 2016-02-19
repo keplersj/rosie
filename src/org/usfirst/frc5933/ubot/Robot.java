@@ -93,9 +93,9 @@ public class Robot extends IterativeRobot {
     }
 
    static public void toggleCamera() {
-	   server.stop();
+	   RiptServer.stop();
 	   String cameraName = "cam0";
-	   if (server.getCameraName() == "cam0") {
+	   if (server.getCameraName().equals("cam0")) {
 		   cameraName = "cam1";
 	   }
        server = RiptServer.getInstance();

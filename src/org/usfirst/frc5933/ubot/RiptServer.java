@@ -59,7 +59,6 @@ public class RiptServer {
 		return server;
 	}
 
-	private Thread serverThread;
 	private int m_quality;
 	private boolean m_autoCaptureStarted;
 	private boolean m_hwClient = true;
@@ -85,16 +84,12 @@ public class RiptServer {
 		for (int i = 0; i < 3; i++) {
 			m_imageDataPool.addLast(ByteBuffer.allocateDirect(kMaxImageSize));
 		}
-		serverThread = new Thread(new Runnable() {
-			public void run() {
-				try {
-					serve();
-				} catch (IOException e) {
-					// do stuff here
-				} catch (InterruptedException e) {
-					// do stuff here
-				}
-			}
+		Thread serverThread = new Thread(() -> {
+            try {
+                serve();
+            } catch (IOException | InterruptedException e) {
+                // do stuff here
+            }
 		});
 		serverThread.setName("RiptServer Send Thread");
 		serverThread.start();
@@ -197,12 +192,7 @@ public class RiptServer {
 
 		m_camera.startCapture();
 
-		Thread captureThread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				capture();
-			}
-		});
+		Thread captureThread = new Thread(this::capture);
 		captureThread.setName("Camera Capture Thread");
 		captureThread.start();
 	}
@@ -345,7 +335,7 @@ public class RiptServer {
 				long period = (long) (1000 / (1.0 * fps));
 				while (isRunning()) {
 					long t0 = System.currentTimeMillis();
-					CameraData imageData = null;
+					CameraData imageData;
 					synchronized (this) {
 						wait();
 						imageData = m_imageData;
