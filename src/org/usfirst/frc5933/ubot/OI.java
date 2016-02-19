@@ -125,7 +125,7 @@ public class OI {
 
 
         // SmartDashboard Buttons
-        SmartDashboard.putData("DriveStraight", new DriveStraight());
+        SmartDashboard.putData("DriveStraight", new DriveStraight(-0.5, SmartDashboard.getNumber("Inches for driving")));
         SmartDashboard.putData("TurnDegrees", new TurnDegrees());
         SmartDashboard.putData("DeliverBallToLowerWindow", new DeliverBallToLowerWindow());
         SmartDashboard.putData("Align0", new Align0());
