@@ -22,8 +22,6 @@ import org.usfirst.frc5933.ubot.commands.ArcadeDrive;
 import org.usfirst.frc5933.ubot.commands.DeliverBallToLowerWindow;
 import org.usfirst.frc5933.ubot.subsystems.*;
 
-import java.io.Console;
-
 /**
  * The entry point for the Robot source code. Ran by the Java Virtual Machine installed on the RoboRIO.
  * This class contains the methods ran during the modes of driving; autonomous, teleoperation, etc.
