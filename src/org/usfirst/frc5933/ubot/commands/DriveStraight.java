@@ -18,8 +18,8 @@ import org.usfirst.frc5933.ubot.Robot;
  *
  */
 public class DriveStraight extends Command {
-	private double inches_ = 0;
-	private double speed_ = 0;
+	private double inches_ = 157;
+	private double speed_ = 0.5;
 	
 	public DriveStraight(double speed, double inches) {
 		speed_ = speed;
@@ -42,13 +42,12 @@ public class DriveStraight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	// TODO: drive this many inches
-    	// Robot.driveTrain.driveStraight(speed_, inches_);
+        Robot.driveTrain.driveStraight(speed_, inches_);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.driveStraight(speed_);
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -58,7 +57,7 @@ public class DriveStraight extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.driveStraight(0);
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same

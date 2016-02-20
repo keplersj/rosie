@@ -75,7 +75,7 @@ public class Robot extends IterativeRobot {
         arcadeDrive = new ArcadeDrive();
                
         SmartDashboard.putNumber("Degrees for turning", 1);
-        SmartDashboard.putNumber("Inches for driving", 1);
+        SmartDashboard.putNumber("Inches for driving", 157);
 
         server = RiptServer.getInstance();
         server.setQuality(100);

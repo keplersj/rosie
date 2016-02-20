@@ -35,7 +35,9 @@ public class DriveTrain extends Subsystem {
 
     private boolean isReversed = false;
     public static final double RIGHT_DRIVE_MULTIPLIER = 1.0;
-    public static final double LEFT_DRIVE_MULTIPLIER = 1.08;
+    public static final double LEFT_DRIVE_MULTIPLIER = 1.0;
+
+	public static final int TICK_TO_INCH = 17;
     
     public static final double TURBO_FAST_MULTIPLIER = 1.0;
     public static final double TURBO_SLOW_MULTIPLIER = 0.5;
@@ -44,6 +46,7 @@ public class DriveTrain extends Subsystem {
 	private AnalogGyro gyro_ = RobotMap.sensorsAnalogGyro;
 	
 	public static final int TURN_MAX_TRIES = 1000;
+	private int desired_tick;
 
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -92,22 +95,37 @@ public class DriveTrain extends Subsystem {
     public void stop() {
 		robotDrive.stopMotor();
     }
-    
-    public void driveStraight(double speed) {
 
+	public void driveStraight(double speed, double inches) {
+		frontLeftMotor.changeControlMode(CANTalon.TalonControlMode.Position);
+		frontRightMotor.changeControlMode(CANTalon.TalonControlMode.Position);
+		rearLeftMotor.changeControlMode(CANTalon.TalonControlMode.Position);
+		rearRightMotor.changeControlMode(CANTalon.TalonControlMode.Position);
+
+		System.out.println("Front Left Motor: " + frontLeftMotor.get());
+		frontLeftMotor.set(3000);
+		System.out.println("Front Left Motor Part II: " + frontLeftMotor.get());
+		frontRightMotor.set(3000);
+		rearRightMotor.set(3000);
+		rearLeftMotor.set(3000);
+
+		frontLeftMotor.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		frontRightMotor.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rearLeftMotor.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rearRightMotor.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+	}
+
+    public void driveShit(double speed, double inches) {
+		desired_tick = (int) inches * TICK_TO_INCH;
     	// Output the number of idx rises. I think we can use this to determine
     	// the number revolutions and correlate that to inches. We will see....
     	// We may need to use one of the counter classes in the wpilib ....
     	
     	int flm = frontLeftMotor.getNumberOfQuadIdxRises();
-    	int rlm = rearLeftMotor.getNumberOfQuadIdxRises();
         int frm = frontRightMotor.getNumberOfQuadIdxRises();
-        int rrm = rearRightMotor.getNumberOfQuadIdxRises();
     	
-        System.out.println("FLM: " + flm);
-        System.out.println("RLM: " + rlm);
-        System.out.println("FRM: " + frm);
-        System.out.println("RRM: " + rrm);
+        System.out.println("Initial FLM: " + flm);
+        System.out.println("Initial FRM: " + frm);
         
     	double left = speed * LEFT_DRIVE_MULTIPLIER;
     	double right = speed * RIGHT_DRIVE_MULTIPLIER;
@@ -119,8 +137,24 @@ public class DriveTrain extends Subsystem {
     	
     	left *= turboMultiplier;
     	right *= turboMultiplier;
+
+		int expected_flm = flm + desired_tick;
+		int expected_frm = frm + desired_tick;
+
+		System.out.println("Expected FLM: " + expected_flm);
+		System.out.println("Expected FRM: " + expected_frm);
     	
-    	robotDrive.tankDrive(left, right);
+    	while ((frontRightMotor.getNumberOfQuadIdxRises() < expected_frm)) {
+			robotDrive.tankDrive(left, right);
+
+		}
+		robotDrive.tankDrive(0,0);
+
+
+		System.out.println("Final FLM: " + frontLeftMotor.getNumberOfQuadIdxRises());
+		System.out.println("Final FRM: " + frontRightMotor.getNumberOfQuadIdxRises());
+		System.out.println("Expected FLM: " + expected_flm);
+		System.out.println("Expected FRM: " + expected_frm);
     }
     
     public void toggleTurbo() {
