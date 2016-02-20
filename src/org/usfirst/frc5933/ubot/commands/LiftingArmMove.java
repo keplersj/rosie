@@ -42,9 +42,7 @@ public class LiftingArmMove extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// TODO: Removing this for now, since we want to favor the teleopPeriodic approach.
-    	// if this approach works better, then we can remove this whole class.
-    	// Robot.arm.joystickMove();
+    	Robot.arm.joystickMove(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()

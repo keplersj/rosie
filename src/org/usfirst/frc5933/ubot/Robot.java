@@ -156,19 +156,11 @@ public class Robot extends IterativeRobot {
         rumbleInYourPants();
         turnSpindleIfNeeded();
 
-        System.out.println("Ultrasonic: " + RobotMap.sensorsUtrasonic.getValue());
+        // System.out.println("Ultrasonic: " + RobotMap.sensorsUtrasonic.getValue());
 
         if (arcadeDrive != null) arcadeDrive.start();
     }
 
-    public void moveArmIfNeeded() {
-        if (Robot.oi.getXBoxJoystick().getRawButton(5)) {
-        	Robot.arm.joystickMove(false);
-        }
-        if (Robot.oi.getXBoxJoystick2().getRawButton(5)) {
-        	Robot.arm.joystickMove(true);
-        }
-    }
     
     public void turnSpindleIfNeeded() {
     	if (Robot.oi.getAButton().get() || Robot.oi.getAButton2().get()) {
