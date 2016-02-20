@@ -164,9 +164,9 @@ public class Robot extends IterativeRobot {
     
     public void turnSpindleIfNeeded() {
     	if (Robot.oi.getAButton().get() || Robot.oi.getAButton2().get()) {
-    		Robot.ballGrabberSubsystem.runForward();
-    	} else if (Robot.oi.getBButton().get() || Robot.oi.getBButton2().get()) {
     		Robot.ballGrabberSubsystem.runBackward();
+    	} else if (Robot.oi.getBButton().get() || Robot.oi.getBButton2().get()) {
+    		Robot.ballGrabberSubsystem.runForward();
     	} else {
     		Robot.ballGrabberSubsystem.stop();
     	}
