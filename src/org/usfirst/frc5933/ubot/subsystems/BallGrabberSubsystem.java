@@ -49,11 +49,11 @@ public class BallGrabberSubsystem extends Subsystem {
     }
 
     public void runForward() {
-    	spindleMotor.set(-.5);
+    	spindleMotor.set(-1.0);
     }
     
     public void runBackward() {
-    	spindleMotor.set(.5);
+    	spindleMotor.set(1.0);
     }
     
     public void stop() {
