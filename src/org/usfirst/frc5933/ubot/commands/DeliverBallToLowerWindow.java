@@ -146,11 +146,11 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 				l1 += 10;
 			}
 
-			addSequential(new DriveStraight(path4Speed, l1)); 
-			addSequential(new TurnDegrees(path4Speed, dg1)); 
-			addSequential(new DriveStraight(path4Speed, l2)); 
-			addSequential(new TurnDegrees(path4Speed, dg2));
-			addSequential(new DriveStraight(path4Speed, l3));
+			addSequential(new DriveStraight(path4Speed, l1)); // TODO: The inches are not right
+			addSequential(new TurnDegrees(path4Speed, dg1)); // TODO: The degrees are not right
+			addSequential(new DriveStraight(path4Speed, l2)); // TODO: The inches are not right
+			addSequential(new TurnDegrees(path4Speed, dg2)); // TODO: The degress are not right
+			addSequential(new DriveStraight(path4Speed, l3)); // TODO: The inches are not right
 			addSequential(new ToggleReverseSpindle());
 		}
 	}
@@ -159,6 +159,7 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 		double path5Speed = -0.5;
 		if (lowerWindowPosition == 1) {
 			//Barrier 5 to Lower Window 1
+
 			double l1 = 200;
 			double l2 = 200;
 			double l3 = 170;
@@ -169,11 +170,11 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 				l1 += 10;
 			}
 
-			addSequential(new DriveStraight(path5Speed, l1)); 
-			addSequential(new TurnDegrees(path5Speed, dg1)); 
-			addSequential(new DriveStraight(path5Speed, l2)); 
-			addSequential(new TurnDegrees(path5Speed, dg2));
-			addSequential(new DriveStraight(path5Speed, l3));
+			addSequential(new DriveStraight(path5Speed, l1)); // TODO: The inches are not right
+			addSequential(new TurnDegrees(path5Speed, dg1)); // TODO: The degrees are not right
+			addSequential(new DriveStraight(path5Speed, l2)); // TODO: The inches are not right
+			addSequential(new TurnDegrees(path5Speed, dg2)); // TODO: The degrees are not right
+			addSequential(new DriveStraight(path5Speed, l3)); // TODO: The inches are not right
 			addSequential(new ToggleReverseSpindle());
 		}
 	}
@@ -182,6 +183,9 @@ public class DeliverBallToLowerWindow extends CommandGroup {
 		double path6Speed = -0.5;
 		if (lowerWindowPosition == 1) {
 			//Spy Box to Lower Window 1
+
+			//TODO: Position unknown, will have to change lengths and degrees
+
 			double l1 = 60;
 			double l2 = 110;
 			double dg1 = 45;
