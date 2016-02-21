@@ -38,7 +38,8 @@ public class Align180 extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.align180Degrees(0.5);
+    	// TODO: this is not working .... Commenting out for now since we don't want to confuse the drivers.
+    	// Robot.driveTrain.align180Degrees(0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run

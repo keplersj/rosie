@@ -93,17 +93,19 @@ public class Robot extends IterativeRobot {
     }
 
    static public void toggleCamera() {
-	   //RiptServer.stop();
-	   //String cameraName = "cam0";
-	   //if (server.getCameraName().equals("cam0")) {
-	//	   cameraName = "cam1";
-	//   }
-    //   server = RiptServer.getInstance();
-    //   server.setQuality(100);
-    //   server.setSize(0);
-    //   server.startAutomaticCapture(cameraName);
 	   
+	   // Commented out until we attach a 2nd camera.
+	   // RiptServer.stop();
+	   // String cameraName = "cam0";
+	   // if (server.getCameraName().equals("cam0")) {
+	   //	   cameraName = "cam1";
+	   // }
+	   // server = RiptServer.getInstance();
+	   // server.setQuality(100);
+	   // server.setSize(0);
+	   // server.startAutomaticCapture(cameraName);
 	   // server.startAutomaticCapture("cam1");
+	   
 	   // TODO: Ok I took a stab at changing the camera view as well, and it is a pain in the ass.
 	   // I looked at the CameraFeed class, and after playing around a little while I came to the 
 	   // conclusion that we may want to take a different approach and derive/recreate out own 
@@ -155,7 +157,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         rumbleInYourPants();
         turnSpindleIfNeeded();
-
+        
         // System.out.println("Ultrasonic: " + RobotMap.sensorsUtrasonic.getValue());
 
         if (arcadeDrive != null) arcadeDrive.start();
@@ -184,6 +186,7 @@ public class Robot extends IterativeRobot {
         Robot.oi.getXBoxJoystick2().setRumble(RumbleType.kLeftRumble, (float) Math.abs(accel_z - 1));
         Robot.oi.getXBoxJoystick2().setRumble(RumbleType.kRightRumble, (float) Math.abs(accel_z - 1));
     }
+    
 
     /**
      * This function is called periodically during test mode

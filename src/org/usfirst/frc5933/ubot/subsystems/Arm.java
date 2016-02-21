@@ -12,6 +12,7 @@
 package org.usfirst.frc5933.ubot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc5933.ubot.Robot;
 import org.usfirst.frc5933.ubot.RobotMap;
@@ -49,12 +50,13 @@ public class Arm extends Subsystem {
     	windowMotor.set(1);
     }
 
-    public void joystickMove(boolean useJoystick2) {
+    public void joystickMove() {
     	double value = Robot.oi.getXBoxJoystick().getRawAxis(5);
-    	if (useJoystick2) {
+    	if (Robot.oi.rightJoystickButton2.get()) {
     		value = Robot.oi.getXBoxJoystick2().getRawAxis(5);
     	}
     	windowMotor.set(value);
+    	Timer.delay(0.01);
     }
     
     public void down() {

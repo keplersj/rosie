@@ -464,7 +464,7 @@ Children:
           name: Command
           type: Command
           validators: *id007
-          value: ToggleCamera
+          value: NullCommand
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id008
           default: whileHeld
@@ -764,7 +764,7 @@ Children:
           name: Command
           type: Command
           validators: *id007
-          value: ToggleCamera
+          value: NullCommand
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id008
           default: whileHeld
@@ -1096,7 +1096,7 @@ Children:
         validators: null
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
-        name: Button on SmartDashboard, validators: null, value: true}
+        name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
     Name: Align0
   - Children: []
@@ -1114,7 +1114,7 @@ Children:
         validators: null
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
-        name: Button on SmartDashboard, validators: null, value: true}
+        name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
     Name: Align180
   Properties: {}
