@@ -43,6 +43,8 @@ public class DriveTrain extends Subsystem {
     public static final double TURBO_SLOW_MULTIPLIER = 0.5;
     private double turboMultiplier = TURBO_FAST_MULTIPLIER;
 
+    private static final int RAMP_RATE_IN_SECONDS = 24;  // Maximum change in voltage, in volts / sec. (0 to 6 volts in 1 second)
+    
 	private AnalogGyro gyro_ = RobotMap.sensorsAnalogGyro;
 	
 	public static final int TURN_MAX_TRIES = 1000;
@@ -54,6 +56,10 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain() {
 		super();
 		gyro_.reset();
+    	frontLeftMotor.setVoltageRampRate(RAMP_RATE_IN_SECONDS);
+    	rearLeftMotor.setVoltageRampRate(RAMP_RATE_IN_SECONDS);
+    	frontRightMotor.setVoltageRampRate(RAMP_RATE_IN_SECONDS);
+    	rearRightMotor.setVoltageRampRate(RAMP_RATE_IN_SECONDS);
 	}
 	
 	public DriveTrain(String name) {
@@ -81,7 +87,6 @@ public class DriveTrain extends Subsystem {
 
     	y *= turboMultiplier;
     	x *= turboMultiplier;
-    	
     	// TODO: if we want the arcade to drive straight, we will need
     	// to scale x by some factor.
     	// I think the best way to do this is to temporarily set x to zero,

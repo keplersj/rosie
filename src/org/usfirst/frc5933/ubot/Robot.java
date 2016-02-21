@@ -93,15 +93,15 @@ public class Robot extends IterativeRobot {
     }
 
    static public void toggleCamera() {
-	   RiptServer.stop();
-	   String cameraName = "cam0";
-	   if (server.getCameraName().equals("cam0")) {
-		   cameraName = "cam1";
-	   }
-       server = RiptServer.getInstance();
-       server.setQuality(100);
-       server.setSize(0);
-       server.startAutomaticCapture(cameraName);
+	   //RiptServer.stop();
+	   //String cameraName = "cam0";
+	   //if (server.getCameraName().equals("cam0")) {
+	//	   cameraName = "cam1";
+	//   }
+    //   server = RiptServer.getInstance();
+    //   server.setQuality(100);
+    //   server.setSize(0);
+    //   server.startAutomaticCapture(cameraName);
 	   
 	   // server.startAutomaticCapture("cam1");
 	   // TODO: Ok I took a stab at changing the camera view as well, and it is a pain in the ass.
