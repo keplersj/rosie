@@ -158,7 +158,7 @@ public class Robot extends IterativeRobot {
         rumbleInYourPants();
         turnSpindleIfNeeded();
         
-        System.out.println("Ultrasonic: " + RobotMap.sensorsUtrasonic.getValue());
+        // System.out.println("Ultrasonic: " + RobotMap.sensorsUtrasonic.getValue());
 
         if (arcadeDrive != null) arcadeDrive.start();
     }
