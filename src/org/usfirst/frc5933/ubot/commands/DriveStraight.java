@@ -11,19 +11,27 @@
 
 package org.usfirst.frc5933.ubot.commands;
 
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc5933.ubot.Robot;
 
 /**
  *
  */
 public class DriveStraight extends Command {
-	private double inches_ = 157;
-	private double speed_ = 0.5;
+	private double inches_ = 0;
+	private double speed_ = 0;
+	private boolean useDumbDashboard_ = true;
+	private int tickCount_ = 0;
+	public final static int SOME_MULTIPLIER = 1;
 	
 	public DriveStraight(double speed, double inches) {
 		speed_ = speed;
 		inches_ = inches;
+		useDumbDashboard_ = false;
 	}
 	
 	
@@ -44,21 +52,43 @@ public class DriveStraight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.driveTrain.driveStraight(speed_, inches_);
+        if (useDumbDashboard_) {
+        	speed_ = .5;
+            inches_ = SmartDashboard.getNumber("Inches for driving");
+        }
+
+        // TODO: Until we get the whole encoder thang worked out,
+        // we shouldn't do this.
+    	// Robot.driveTrain.changeControlMode(CANTalon.TalonControlMode.Position);
+
+        Robot.driveTrain.enableBrakeMode(true);
+    	tickCount_ = (int)inches_ * SOME_MULTIPLIER;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
+    	while (tickCount_ > 0) {
+    		Robot.driveTrain.driveStraight(speed_);
+            // I don't know why we need these delays. Typically this sort of delay
+    		// in a method points out a shortcoming of the framework and makes programs
+    		// indeterministic. So you could say the suck has been turned up to 11...
+    		Timer.delay(0.004);
+    		--tickCount_;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
+    	return tickCount_ == 0;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        // TODO: Until we get the whole encoder thang worked out,
+        // we shouldn't do this.
+    	// Robot.driveTrain.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+
+    	Robot.driveTrain.enableBrakeMode(false);
     	Robot.driveTrain.stop();
     }
 
