@@ -184,7 +184,7 @@ Children:
           default: '0'
           name: Input Channel (Analog)
           validators: [AnalogInput]
-          value: '2'
+          value: '1'
       Base: Analog Input
       Name: Utrasonic
     Properties:

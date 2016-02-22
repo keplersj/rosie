@@ -78,7 +78,7 @@ public class RobotMap {
         sensorsAnalogGyro = new AnalogGyro(0);
         LiveWindow.addSensor("Sensors", "AnalogGyro", sensorsAnalogGyro);
         sensorsAnalogGyro.setSensitivity(0.007);
-        sensorsUtrasonic = new AnalogInput(2);
+        sensorsUtrasonic = new AnalogInput(1);
         LiveWindow.addSensor("Sensors", "Utrasonic", sensorsUtrasonic);
         
         ballGrabberSubsystemSpindleMotor = new Jaguar(0);

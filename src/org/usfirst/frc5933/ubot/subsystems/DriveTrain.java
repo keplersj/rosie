@@ -55,7 +55,7 @@ public class DriveTrain extends Subsystem {
 
 	public DriveTrain() {
 		super();
-		gyro_.reset();
+		gyro_.initGyro();
     	frontLeftMotor.setVoltageRampRate(RAMP_RATE_IN_SECONDS);
     	rearLeftMotor.setVoltageRampRate(RAMP_RATE_IN_SECONDS);
     	frontRightMotor.setVoltageRampRate(RAMP_RATE_IN_SECONDS);
@@ -64,7 +64,7 @@ public class DriveTrain extends Subsystem {
 	
 	public DriveTrain(String name) {
 		super(name);
-		gyro_.reset();
+		gyro_.initGyro();
 	}
 	
     public void initDefaultCommand() {
@@ -178,13 +178,14 @@ public class DriveTrain extends Subsystem {
     }
     
     public void turnDegrees(double speed, double degrees) {
-		double startingAngle = gyro_.getAngle();
+		gyro_.reset();
+    	final double startingAngle = gyro_.getAngle();
 		double now = startingAngle;
-		double desired = now;
+		final double desired = now + degrees;
+		
 		int tries = TURN_MAX_TRIES;
 		
-		if (degrees > 0) {
-			desired = now + degrees;
+		if (desired > startingAngle) {
 			do {
 				robotDrive.tankDrive(-speed, speed);
 				now = gyro_.getAngle();
@@ -195,7 +196,6 @@ public class DriveTrain extends Subsystem {
 				}
 			} while (now < desired);
 		} else {
-			desired = now - degrees;
 			do {
 				robotDrive.tankDrive(speed, -speed);
 				now = gyro_.getAngle();

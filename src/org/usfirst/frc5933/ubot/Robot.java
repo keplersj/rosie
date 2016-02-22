@@ -74,7 +74,6 @@ public class Robot extends IterativeRobot {
     
         arcadeDrive = new ArcadeDrive();
                
-        SmartDashboard.putNumber("Degrees for turning", 1);
         SmartDashboard.putNumber("Inches for driving", 157);
 
         server = RiptServer.getInstance();
@@ -90,6 +89,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Autonomous Starting Position", 0);
         SmartDashboard.putNumber("Autonomous Barrier Number", 0);
         SmartDashboard.putNumber("Autonomous Lower Window Position", 0);
+        SmartDashboard.putNumber("Degrees for turning", 0);
     }
 
    static public void toggleCamera() {
@@ -158,7 +158,7 @@ public class Robot extends IterativeRobot {
         rumbleInYourPants();
         turnSpindleIfNeeded();
         
-        // System.out.println("Ultrasonic: " + RobotMap.sensorsUtrasonic.getValue());
+        System.out.println("Ultrasonic: " + RobotMap.sensorsUtrasonic.getValue());
 
         if (arcadeDrive != null) arcadeDrive.start();
     }
