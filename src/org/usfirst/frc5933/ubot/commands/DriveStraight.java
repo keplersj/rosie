@@ -65,7 +65,7 @@ public class DriveStraight extends Command {
     	// Robot.driveTrain.changeControlMode(CANTalon.TalonControlMode.Position);
 
         Robot.driveTrain.enableBrakeMode(true);
-    	tickCount_ = (int)(inches_ * SOME_MULTIPLIER);
+        tickCount_ = (int)(inches_ * SOME_MULTIPLIER);
 		gyro_.reset();
     }
 
