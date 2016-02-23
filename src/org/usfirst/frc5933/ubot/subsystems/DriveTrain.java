@@ -102,10 +102,11 @@ public class DriveTrain extends Subsystem {
 		robotDrive.stopMotor();
     }
 
-    public void driveStraight(double speed) {
-        gyro_.reset();
-        double angle = gyro_.getAngle();
-        robotDrive.drive(speed, -angle * Kp);
+    public void driveStraight(double speed, double curve) {
+        // gyro_.reset();
+        // double angle = gyro_.getAngle();
+        // robotDrive.drive(speed, -angle * Kp);
+    	robotDrive.drive(speed, curve);
     }
     
     public void set(double speed) {
@@ -131,7 +132,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void turnDegrees(double speed, double degrees) {
-		gyro_.reset();
+    	enableBrakeMode(true);
+    	gyro_.reset();
     	final double startingAngle = gyro_.getAngle();
 		double now = startingAngle;
 		final double desired = now + degrees;
@@ -159,6 +161,7 @@ public class DriveTrain extends Subsystem {
 				}
 			} while (now > startingAngle + degrees);
 		}
+    	enableBrakeMode(false);
 		
 		stop();
     }

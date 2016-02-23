@@ -11,12 +11,14 @@
 
 package org.usfirst.frc5933.ubot.commands;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc5933.ubot.Robot;
+import org.usfirst.frc5933.ubot.RobotMap;
 
 /**
  *
@@ -26,7 +28,8 @@ public class DriveStraight extends Command {
 	private double speed_ = 0;
 	private boolean useDumbDashboard_ = true;
 	private int tickCount_ = 0;
-	public final static int SOME_MULTIPLIER = 1;
+	public final static double SOME_MULTIPLIER = 5.5;
+	private AnalogGyro gyro_ = RobotMap.sensorsAnalogGyro;
 	
 	public DriveStraight(double speed, double inches) {
 		speed_ = speed;
@@ -62,17 +65,26 @@ public class DriveStraight extends Command {
     	// Robot.driveTrain.changeControlMode(CANTalon.TalonControlMode.Position);
 
         Robot.driveTrain.enableBrakeMode(true);
-    	tickCount_ = (int)inches_ * SOME_MULTIPLIER;
+    	tickCount_ = (int)(inches_ * SOME_MULTIPLIER);
+		gyro_.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+        // gyro_.reset();
+        // double angle = gyro_.getAngle();
+        // robotDrive.drive(speed, -angle * Kp);
+
     	while (tickCount_ > 0) {
-    		Robot.driveTrain.driveStraight(speed_);
-            // I don't know why we need these delays. Typically this sort of delay
+    		// Timer.delay(0.004);
+            double angle = gyro_.getAngle();
+            double curve = angle * 0.03;
+            Robot.driveTrain.driveStraight(-speed_, -curve);
+
+    		// I don't know why we need these delays. Typically this sort of delay
     		// in a method points out a shortcoming of the framework and makes programs
     		// indeterministic. So you could say the suck has been turned up to 11...
-    		Timer.delay(0.004);
     		--tickCount_;
     	}
     }
