@@ -63,6 +63,7 @@ public class DriveStraight extends Command {
 
         Robot.driveTrain.enableBrakeMode(true);
     	tickCount_ = (int)inches_ * SOME_MULTIPLIER;
+        Robot.driveTrain.getGyro().reset();
     }
 
     // Called repeatedly when this Command is scheduled to run

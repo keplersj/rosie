@@ -103,10 +103,13 @@ public class DriveTrain extends Subsystem {
     }
 
     public void driveStraight(double speed) {
-        gyro_.reset();
-        double angle = gyro_.getAngle();
+		double angle = gyro_.getAngle();
         robotDrive.drive(speed, -angle * Kp);
     }
+
+	public AnalogGyro getGyro() {
+		return gyro_;
+	}
     
     public void set(double speed) {
 		frontLeftMotor.set(speed);
