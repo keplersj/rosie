@@ -12,6 +12,7 @@
 package org.usfirst.frc5933.ubot.subsystems;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc5933.ubot.RobotMap;
@@ -56,7 +57,14 @@ public class DriveTrain extends Subsystem {
     public static final int TURN_MAX_TRIES = 1000;
 
     private static final double Kp = 0.03;
-
+    
+    private TalonControlMode originalmode;
+    private double originalLeftPosition;
+    private double targetLeftRotations;
+    private double originalRightPosition;
+    private double targetRightRotations;
+    
+    
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -64,6 +72,10 @@ public class DriveTrain extends Subsystem {
         super();
         gyro_.initGyro();
         setRampRateToEliminateBrownOuts();
+        frontLeftMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+        frontRightMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+        frontLeftMotor.configEncoderCodesPerRev(360);
+        frontRightMotor.configEncoderCodesPerRev(360);
     }
 
     public DriveTrain(String name) {
@@ -263,11 +275,97 @@ public class DriveTrain extends Subsystem {
         rearRightMotor.setVoltageRampRate(RAMP_RATE_IN_SECONDS);
     }
 
-    public void changeControlMode(TalonControlMode mode) {
+    private void changeControlMode(TalonControlMode mode) {
         frontLeftMotor.changeControlMode(mode);
+        frontLeftMotor.enableControl();
+        
         frontRightMotor.changeControlMode(mode);
-        rearLeftMotor.changeControlMode(mode);
-        rearRightMotor.changeControlMode(mode);
+        frontRightMotor.enableControl();
+
+        if (mode == TalonControlMode.Position) {
+            rearLeftMotor.changeControlMode(TalonControlMode.Follower);
+            rearLeftMotor.set(frontLeftMotor.getDeviceID());
+            rearLeftMotor.enableControl();
+            
+            rearRightMotor.changeControlMode(TalonControlMode.Follower);
+            rearRightMotor.set(frontRightMotor.getDeviceID());
+            rearRightMotor.enableControl();
+            
+        } else {
+            rearLeftMotor.changeControlMode(mode);
+            rearLeftMotor.enableControl();
+            rearRightMotor.changeControlMode(mode);
+            rearRightMotor.enableControl();
+        }
     }
 
+    public void startPositionMovement(double leftRotations, double rightRotations) {
+        originalmode = frontLeftMotor.getControlMode();
+        
+        // FIXME: Right now, this algorithm does not handle negative rotations since I don't
+        // now what that will do to the position values;
+        if ((leftRotations <= 0) || (rightRotations <= 0)) {
+            targetLeftRotations = 0;
+            targetRightRotations = 0;
+            originalLeftPosition = 0;
+            originalRightPosition = 0;
+            return;
+        }
+            
+        changeControlMode(TalonControlMode.Position);
+
+        targetLeftRotations = leftRotations;
+        targetRightRotations = rightRotations;
+        
+        double frontLeftPosition = frontLeftMotor.getPosition();
+        originalLeftPosition = frontLeftPosition;
+        frontLeftPosition += leftRotations;
+        
+        double rearLeftPosition = rearLeftMotor.getPosition();
+        rearLeftPosition += leftRotations;
+ 
+        double frontRightPosition = frontRightMotor.getPosition();
+        originalRightPosition = frontRightPosition;
+        frontRightPosition += rightRotations;
+
+        double rearRightPosition = rearRightMotor.getPosition();
+        rearRightPosition += rightRotations;
+        
+        frontLeftMotor.set(frontLeftPosition);
+        rearLeftMotor.set(rearLeftPosition);
+
+        frontRightMotor.set(frontRightPosition);
+        rearRightMotor.set(rearRightPosition);
+    }
+
+    public boolean hasFinishedPositionMovement() {
+        // FIXME: Right now, this algorithm does not handle negative rotations since I don't
+        // now what that will do to the position values;
+        if ((targetLeftRotations == 0) && (targetRightRotations == 0)) 
+            return true;
+
+        double frontLeftPosition = frontLeftMotor.getPosition();
+        boolean leftHasFinished = false;
+        if (frontLeftPosition >= originalLeftPosition + targetLeftRotations) {
+            leftHasFinished = true;
+        }
+        
+        double frontRightPosition = frontRightMotor.getPosition();
+        boolean rightHasFinished = false;
+        if (frontRightPosition >= originalRightPosition + targetRightRotations) {
+            rightHasFinished = true;
+        }
+        
+        return leftHasFinished && rightHasFinished;
+    }
+    
+    public void endPositionMovement() {
+        changeControlMode(originalmode);
+
+        // FIXME: It is unclear if I have to do this ....
+        // frontLeftMotor.disableControl();
+        // frontRightMotor.disableControl();
+        // rearLeftMotor.disableControl();
+        // rearRightMotor.disableControl();
+    }
 }
