@@ -186,7 +186,7 @@ Children:
           validators: [AnalogInput]
           value: '1'
       Base: Analog Input
-      Name: Utrasonic
+      Name: ForwardUltrasonic
     Properties:
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
