@@ -33,4 +33,8 @@ public class Helmsman {
     public final double getForwardUltrasonicDistance() {
         return forwardUltrasonic_.getAverageVoltage() * FORWARD_V2D;
     }
+    
+    public void trackPosition() {
+        // TODO:
+    }
 }

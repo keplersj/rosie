@@ -1,8 +1,8 @@
 package org.usfirst.frc5933.ubot.mapping;
 
 public class Shape {
-    private String name_;
-    private Coordinate origin_;
+    protected String name_;
+    protected Coordinate origin_;
     
     Shape() {
         name_ = "unknown";

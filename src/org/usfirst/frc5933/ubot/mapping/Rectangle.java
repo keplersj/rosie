@@ -1,8 +1,8 @@
 package org.usfirst.frc5933.ubot.mapping;
 
 public class Rectangle extends Shape {
-    private double width_ = 0;
-    private double length_ = 0;
+    protected double width_ = 0;
+    protected double length_ = 0;
     
     public Rectangle() {
         super();
