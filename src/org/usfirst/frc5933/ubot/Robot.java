@@ -40,7 +40,6 @@ public class Robot extends IterativeRobot {
     Command arcadeDrive;
     private static RiptServer server;
     public static OI oi;
-    private BuiltInAccelerometer accel = new BuiltInAccelerometer();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -182,7 +181,7 @@ public class Robot extends IterativeRobot {
      * Takes the Z Axis of the RoboRIO accelerometer, and passes it to the Joystick for haptic feedback of the robot.
      */
     public void rumbleInYourPants() {
-        double accel_z = accel.getZ();
+        double accel_z = RobotMap.helmsman.getAcceleromoterZ();
 
         Robot.oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(accel_z - 1));
         Robot.oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(accel_z - 1));

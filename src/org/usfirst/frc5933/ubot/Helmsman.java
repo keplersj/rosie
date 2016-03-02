@@ -4,6 +4,7 @@ import org.usfirst.frc5933.ubot.mapping.FieldOfPlay;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
 public class Helmsman {
     
@@ -12,7 +13,8 @@ public class Helmsman {
     private static AnalogInput forwardUltrasonic_ = RobotMap.sensorsForwardUltrasonic;
     private static final double FORWARD_V2D = 1;     // Voltage to distance (inches) scalar for forward ultrasonic
     private FieldOfPlay field_ = new FieldOfPlay();
-    
+    private BuiltInAccelerometer accel = new BuiltInAccelerometer();
+
     Helmsman() {
         gyro_.initGyro();
         initialGyroAngle = gyro_.getAngle();
@@ -36,5 +38,9 @@ public class Helmsman {
     
     public void trackPosition() {
         // TODO:
+    }
+    
+    public double getAcceleromoterZ() {
+        return accel.getZ();
     }
 }
