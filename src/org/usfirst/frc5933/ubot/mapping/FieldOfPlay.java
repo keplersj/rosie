@@ -16,7 +16,7 @@ public class FieldOfPlay {
     private ArrayList landmarks_ = new ArrayList();
     private ArrayList startingPositions_ = new ArrayList();
     private ArrayList defensePositions_ = new ArrayList();
-    
+
     public FieldOfPlay() {
         // Right and left games pieces are from the point of view that someone is standing 
         // at the center of the field looking down the positive y axis. 
@@ -34,7 +34,7 @@ public class FieldOfPlay {
         defensePositions_.add(new Rectangle("RedDefensePosition3", new Coordinate(6, 7, 8))); // FIXME
         defensePositions_.add(new Rectangle("RedDefensePosition4", new Coordinate(6, 7, 8))); // FIXME
         defensePositions_.add(new Rectangle("RedDefensePosition5", new Coordinate(6, 7, 8))); // FIXME
-        
+
         defensePositions_.add(new Rectangle("BlueDefensePosition1", new Coordinate(6, 7, 8))); // FIXME
         defensePositions_.add(new Rectangle("BlueDefensePosition2", new Coordinate(6, 7, 8))); // FIXME
         defensePositions_.add(new Rectangle("BlueDefensePosition3", new Coordinate(6, 7, 8))); // FIXME
