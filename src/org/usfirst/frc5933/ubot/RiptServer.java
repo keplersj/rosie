@@ -379,5 +379,6 @@ public class RiptServer {
                 continue;
             }
         }
+        socket.close();
     }
 }

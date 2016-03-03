@@ -11,8 +11,6 @@
 
 package org.usfirst.frc5933.ubot.commands;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -76,13 +74,11 @@ public class DriveStraight extends Command {
         int absoluteCount_ = 0;
         while (tickCount_ > 0) {
 
-            double angle = RobotMap.helmsman.getGyroAngle();
+            double angle = RobotMap.helmsman.getCurrentGyroAngle();
             double curve = angle * 0.003; //worked 2/23/16 as 0.003 
             Robot.driveTrain.driveStraight(-speed_, -curve); //DO NOT change this
 
-            //System.out.println("Ultrasonic: " + RobotMap.sensorsUtrasonic.getAverageValue());
-            System.out.println("Ultrasonic Raw: " + RobotMap.helmsman.getForwardUltrasonicDistance());
-
+            System.out.println("Ultrasonic: " + RobotMap.helmsman.getForwardUltrasonicDistance());
 
             if (RobotMap.helmsman.getForwardUltrasonicDistance() < 102){ //drive until 7' away from wall
                 ++absoluteCount_;

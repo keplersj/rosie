@@ -91,18 +91,8 @@ public class DeliverBallToLowerWindow extends CommandGroup {
         if (lowerWindowPosition == 1) {
             //Low bar, path to Lower Window 1
 
-            double l1 = 6 * 12; //Inches
-            double dg = 132; //Degrees
-            double l2 = 15.375 * 12; //Inches
-
-            if (barrierNumber == 2) {
-                l1 +=10;
-            }
-
             addSequential(new DriveStraight(path1Speed, 132)); // TODO: The inches are not right
-            //addSequential(new TurnDegrees(path1Speed, dg)); // TODO: The degrees are not right
             addSequential(new DriveStraight(path1Speed, -132)); // TODO: The inches are not right
-            //addSequential(new ToggleReverseSpindle());
         }
     }
 

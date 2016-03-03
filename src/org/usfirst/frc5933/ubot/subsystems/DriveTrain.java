@@ -55,14 +55,11 @@ public class DriveTrain extends Subsystem {
 
     public static final int TURN_MAX_TRIES = 1000;
 
-    private static final double Kp = 0.03;
-
     private TalonControlMode originalmode;
     private double originalLeftPosition;
     private double targetLeftRotations;
     private double originalRightPosition;
     private double targetRightRotations;
-
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -112,9 +109,6 @@ public class DriveTrain extends Subsystem {
     }
 
     public void driveStraight(double speed, double curve) {
-        // RobotMap.helmsman.resetGyro();
-        // double angle = RobotMap.helmsman.getGyroAngle();
-        // robotDrive.drive(speed, -angle * Kp);
         robotDrive.drive(speed, curve);
     }
 
@@ -143,7 +137,7 @@ public class DriveTrain extends Subsystem {
     public void turnDegrees(double speed, double degrees) {
         enableBrakeMode(true);
         RobotMap.helmsman.resetGyro();
-        final double startingAngle = RobotMap.helmsman.getGyroAngle();
+        final double startingAngle = RobotMap.helmsman.getCurrentGyroAngle();
         double now = startingAngle;
         final double desired = now + degrees;
 
@@ -152,7 +146,7 @@ public class DriveTrain extends Subsystem {
         if (desired > startingAngle) {
             do {
                 robotDrive.tankDrive(-speed, speed);
-                now = RobotMap.helmsman.getGyroAngle();
+                now = RobotMap.helmsman.getCurrentGyroAngle();
                 --tries;
                 if (tries == 0) {
                     System.err.println("Failed to turn specified degrees.");
@@ -162,7 +156,7 @@ public class DriveTrain extends Subsystem {
         } else {
             do {
                 robotDrive.tankDrive(speed, -speed);
-                now = RobotMap.helmsman.getGyroAngle();
+                now = RobotMap.helmsman.getCurrentGyroAngle();
                 --tries;
                 if (tries == 0) {
                     System.err.println("Failed to turn specified degrees.");
