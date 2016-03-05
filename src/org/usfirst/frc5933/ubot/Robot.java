@@ -131,7 +131,8 @@ public class Robot extends IterativeRobot {
         rumbleInYourPants();
         turnSpindleIfNeeded();
         turnWinchIfNeeded();
-
+        // FIXME need to cancel autonomouns !!!!!!
+        
         if (arcadeDrive != null) arcadeDrive.start();
     }
 
