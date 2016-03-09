@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
 
 public class Helmsman {
-    private static final double FORWARD_V2D = 1;     // Voltage to distance (inches) scalar for forward ultrasonic
 
     private AnalogGyro gyro_ = RobotMap.sensorsAnalogGyro;
     private double beginingGyroAngle_ = 0;
@@ -17,8 +16,7 @@ public class Helmsman {
     private double initialGyroAngle_ = 0;
     private double initialGyroCenter_ = 0;
     private double initialGyroOffset_ = 0;
-    
-    private static AnalogInput forwardUltrasonic_ = RobotMap.sensorsForwardUltrasonic;
+
     private FieldOfPlay field_ = new FieldOfPlay();
     private BuiltInAccelerometer accel_ = new BuiltInAccelerometer();
     private static RiptServer cameraServer_;
@@ -26,10 +24,18 @@ public class Helmsman {
     private CANTalon frontLeftMotor_ = RobotMap.driveTrainFrontLeftMotor;
     private double initialFrontLeftMotorPosition_ = 0;
     private double currentFrontLeftMotorPosition_ = 0;
-    
+
     private CANTalon frontRightMotor_ = RobotMap.driveTrainFrontRightMotor;
     private double initialFrontRightMotorPosition_ = 0;
     private double currentFrontRightMotorPosition_ = 0;
+
+    private static final double FORWARD_V2D = 85.7;     // Voltage to distance (inches) scalar for forward ultrasonic
+    private static final double PORT_V2D = 85.7;     // Voltage to distance (inches) scalar for port ultrasonic
+    private static final double STARBOARD_V2D = 85.7;     // Voltage to distance (inches) scalar for starboard ultrasonic
+
+    private static AnalogInput forwardUltrasonic_ = RobotMap.sensorsForwardUltrasonic; //bow
+    private static AnalogInput portUltrasonic_ = RobotMap.sensorsPortUltrasonic; //left
+    private static AnalogInput starboardUltrasonic_ = RobotMap.sensorsStarboardUltrasonic; //right
 
     Helmsman() {
         gyro_.initGyro();
@@ -78,22 +84,30 @@ public class Helmsman {
         return forwardUltrasonic_.getAverageVoltage() * FORWARD_V2D;
     }
 
+    public final double getPortUltrasonicDistance() {
+        return portUltrasonic_.getAverageVoltage() * PORT_V2D;
+    }
+
+    public final double getStarboardUltrasonicDistance() {
+        return starboardUltrasonic_.getAverageVoltage() * STARBOARD_V2D;
+    }
+
     public void initTracking() {
         gyro_.reset();
         initialGyroAngle_ = gyro_.getAngle();
         initialGyroCenter_ = gyro_.getCenter();
         initialGyroOffset_ = gyro_.getOffset();
 
-        initialFrontLeftMotorPosition_ = frontLeftMotor_.get();
+        initialFrontLeftMotorPosition_ = frontLeftMotor_.getPosition();
         currentFrontLeftMotorPosition_ = initialFrontLeftMotorPosition_;
 
-        initialFrontRightMotorPosition_ = frontRightMotor_.get();
+        initialFrontRightMotorPosition_ = frontRightMotor_.getPosition();
         currentFrontRightMotorPosition_ = initialFrontRightMotorPosition_;
     }
-    
+
     public void trackPosition() {
-        currentFrontLeftMotorPosition_ = frontLeftMotor_.get();
-        currentFrontRightMotorPosition_ = frontRightMotor_.get();
+        currentFrontLeftMotorPosition_ = frontLeftMotor_.getPosition();
+        currentFrontRightMotorPosition_ = frontRightMotor_.getPosition();
     }
 
     public final double getAcceleromoterZ() {
@@ -103,29 +117,8 @@ public class Helmsman {
     public final double getCurrentLeftMotorPosition() {
         return currentFrontLeftMotorPosition_;
     }
-    
+
     public final double getCurrentRightMotorPosition() {
         return currentFrontRightMotorPosition_;
     }
-
-    // public void toggleCamera() {
-        // Commented out until we attach a 2nd camera.
-        // RiptServer.stop();
-        // String cameraName = "cam0";
-        // if (server.getCameraName().equals("cam0")) {
-        //       cameraName = "cam1";
-        // }
-        // server = RiptServer.getInstance();
-        // server.setQuality(100);
-        // server.setSize(0);
-        // server.startAutomaticCapture(cameraName);
-        // server.startAutomaticCapture("cam1");
-
-        // TODO: Ok I took a stab at changing the camera view as well, and it is a pain in the ass.
-        // I looked at the CameraFeed class, and after playing around a little while I came to the 
-        // conclusion that we may want to take a different approach and derive/recreate out own 
-        // CameraService class. The server thread
-        // in that class is the thang we want to shutdown, but some clown at wpi decided to hard
-        // code some "while true loops" that can never be stopped.
-    // }
 }
