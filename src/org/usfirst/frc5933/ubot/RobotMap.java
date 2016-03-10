@@ -99,9 +99,6 @@ public class RobotMap {
         ballGrabberSubsystemSpindleMotor = new Jaguar(0);
         LiveWindow.addActuator("BallGrabberSubsystem", "SpindleMotor", (Jaguar) ballGrabberSubsystemSpindleMotor);
 
-        armWindowMotor = new Jaguar(7);
-        LiveWindow.addActuator("Arm", "WindowMotor", (Jaguar) armWindowMotor);
-
         winchWinchMotor = new Jaguar(2);
         LiveWindow.addActuator("Winch", "WinchMotor", (Jaguar) winchWinchMotor);
 

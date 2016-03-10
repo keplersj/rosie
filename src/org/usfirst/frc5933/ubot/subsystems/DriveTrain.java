@@ -91,19 +91,19 @@ public class DriveTrain extends Subsystem {
     private static final double POSITION_CLOSE = 200;
 
     private boolean debug_ = false;
-    
+
     private double closedLoopFeedForward_ = 0;
-    private double closedLoopPorportional_ = 0.13;
+    private double closedLoopPorportional_ = 0.115;
     private double closedLoopIntegration_ = 0;
     private double closedLoopDerivative_ = 0;
-    
-    
+
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public DriveTrain() {
         super();
-        
+
         // use the preferences to determine if we should debug this subsystem
         if (Preferences.getInstance().containsKey(PreferenceConstants.DEBUG_SUBSYSTEM_DRIVE_TRAIN_KEY)) {
             debug_ = Preferences.getInstance().getBoolean(PreferenceConstants.DEBUG_SUBSYSTEM_DRIVE_TRAIN_KEY, false);
@@ -114,6 +114,12 @@ public class DriveTrain extends Subsystem {
         frontRightMotor.reverseSensor(false);
         frontLeftMotor.reverseOutput(false);
         frontLeftMotor.reverseSensor(true);
+
+        rearRightMotor.reverseOutput(true);
+        rearRightMotor.reverseSensor(false);
+        rearLeftMotor.reverseOutput(false);
+        rearLeftMotor.reverseSensor(true);
+
     }
 
     public DriveTrain(String name) {
@@ -155,7 +161,7 @@ public class DriveTrain extends Subsystem {
 
         if (debug_)
             printEncoderDebugging(true);
-        
+
         robotDrive.arcadeDrive(-y, x);
     }
 
@@ -249,6 +255,14 @@ public class DriveTrain extends Subsystem {
     private void changeControlMode(TalonControlMode mode) {
         frontLeftMotor.changeControlMode(mode);
         frontRightMotor.changeControlMode(mode);
+        
+        if (mode == TalonControlMode.Position) {
+            rearLeftMotor.changeControlMode(TalonControlMode.Follower);
+            rearRightMotor.changeControlMode(TalonControlMode.Follower);
+        } else {
+            rearLeftMotor.changeControlMode(mode);
+            rearRightMotor.changeControlMode(mode);
+        }
     }
 
     // Set up the position movement variables and configuration.
@@ -259,9 +273,9 @@ public class DriveTrain extends Subsystem {
         sameLeftCount_ = 0;
         lastRightPosition_ = 0;
         sameRightCount_ = 0;
-        
+
         isCloseDebounce_ = false;
-        
+
         targetLeftPosition_ = frontLeftMotor.getPosition() + leftRotations;
         targetRightPosition_ = frontRightMotor.getPosition() + rightRotations;
 
@@ -407,12 +421,16 @@ public class DriveTrain extends Subsystem {
 
         setTalonAbsolutePosition(frontLeftMotor);
         setTalonAbsolutePosition(frontRightMotor);
+        setTalonAbsolutePosition(rearLeftMotor);
+        setTalonAbsolutePosition(rearRightMotor);
 
         setTalonFeedbackDevice(frontLeftMotor);
         setTalonFeedbackDevice(frontRightMotor);
 
         configVoltages(frontLeftMotor, 0, 12);
         configVoltages(frontRightMotor, 0, 12);
+        configVoltages(rearLeftMotor, 0, 12);
+        configVoltages(rearRightMotor, 0, 12);
 
         /* set the allowable closed-loop error,
          * Closed-Loop output will be neutral within this range.
@@ -420,10 +438,14 @@ public class DriveTrain extends Subsystem {
          */
         resetClosedLoopErrors(frontLeftMotor);
         resetClosedLoopErrors(frontRightMotor);
+        resetClosedLoopErrors(rearLeftMotor);
+        resetClosedLoopErrors(rearRightMotor);
 
         /* set closed loop gains in slot0 */
         setClosedLoopGains(frontLeftMotor);
         setClosedLoopGains(frontRightMotor);
+        setClosedLoopGains(rearLeftMotor);
+        setClosedLoopGains(rearRightMotor);
     }
 
     private boolean closeToEndPosition() {
