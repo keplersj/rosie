@@ -1,5 +1,6 @@
 package org.usfirst.frc5933.ubot;
 
+import org.usfirst.frc5933.ubot.RobotMap;
 import org.usfirst.frc5933.ubot.mapping.FieldOfPlay;
 
 import edu.wpi.first.wpilibj.AnalogGyro;

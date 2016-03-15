@@ -11,25 +11,47 @@
 
 package org.usfirst.frc5933.ubot.commands;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc5933.ubot.PreferenceConstants;
 import org.usfirst.frc5933.ubot.Robot;
+import org.usfirst.frc5933.ubot.RobotMap;
+import org.usfirst.frc5933.ubot.subsystems.DriveTrain;
 
 /**
  *
  */
 public class GyroTurnDegrees extends Command {
 
+    private final CANTalon frontLeftMotor = RobotMap.driveTrainFrontLeftMotor;
+    private final CANTalon frontRightMotor = RobotMap.driveTrainFrontRightMotor;
+    private final CANTalon rearLeftMotor = RobotMap.driveTrainRearLeftMotor;
+    private final CANTalon rearRightMotor = RobotMap.driveTrainRearRightMotor;
+    private final RobotDrive robotDrive = RobotMap.driveTrainRobotDrive;
+
     private double speed_ = 0;
     private double degrees_ = 0;
     private boolean useDumbDashboard_ = true;
     private boolean debug_ = false;
+    private boolean finished = false;
 
+    private static final int TURN_MAX_TRIES = 1000;
+    private int tries = TURN_MAX_TRIES;
+
+    private double desired;
+    private double startingAngle;
+    private double now;
+
+    @Deprecated
     public GyroTurnDegrees(double speed, double degrees) {
-        speed_ = speed;
+        this(degrees);
+    }
+
+    public GyroTurnDegrees(double degrees) {
         degrees_ = degrees;
         useDumbDashboard_ = false;
         // use the preferences to determine if we should debug this subsystem
@@ -59,20 +81,58 @@ public class GyroTurnDegrees extends Command {
             degrees_ = SmartDashboard.getNumber("Degrees for turning");
         }
         Robot.driveTrain.enableBrakeMode(true);
+        Robot.driveTrain.configForTeleopMode();
+
+        RobotMap.helmsman.resetGyro();
+        startingAngle = RobotMap.helmsman.getCurrentGyroAngle();
+        now = startingAngle;
+        //final double desired = now + degrees;
+        desired = degrees_;
+
         // This call blocks execution, (not really ideal, but hey lets go with it for now)
         // so the operation will return finish during init, so there is no need for us
         // to call anything in execute. This allows us to return true for the isFinished
         // method since we will have finished the turn before isFinished has been called.
-        Robot.driveTrain.gyroTurnDegrees(speed_ , degrees_);
+        //Robot.driveTrain.gyroTurnDegrees(-degrees_);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+            double speed = 0.5;
+            if (now < desired - 50) {
+                speed = 0.8;
+            }
+            else if ( now >= desired-5) {
+                System.out.println("It should be stopping!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                finished = true;
+                Robot.driveTrain.stop();
+//                end();
+            }
+
+            if (desired > startingAngle) {
+                //robotDrive.tankDrive(-speed, speed);
+                frontLeftMotor.set(-speed);
+                rearLeftMotor.set(-speed);
+            } else {
+                //robotDrive.tankDrive(speed, -speed);
+                frontRightMotor.set(-speed);
+                rearRightMotor.set(-speed);
+            }
+            now = RobotMap.helmsman.getCurrentGyroAngle();
+            System.out.println("Angle: " + now);
+            --tries;
+            if (tries == 0) {
+                finished = true;
+                end();
+                if (debug_)
+                    System.err.println("Failed to turn specified degrees.");
+            }
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return finished;
     }
 
     // Called once after isFinished returns true
