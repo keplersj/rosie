@@ -58,7 +58,6 @@ public class DriveTrain extends Subsystem {
     // to give us the best trade of between lag (response time to commands) and not browning
     // out the robot due to to much current draw.
     private static final int RAMP_RATE_IN_SECONDS = 24; 
-    private static final int AUTO_RAMP_RATE_IN_SECONDS = 12; 
     private static final int TURN_MAX_TRIES = 1000;
 
     // These values are used when we are using position mode to drive to a certain point.
@@ -279,7 +278,7 @@ public class DriveTrain extends Subsystem {
     private void changeControlMode(TalonControlMode mode) {
         frontLeftMotor.changeControlMode(mode);
         frontRightMotor.changeControlMode(mode);
-        
+
         if (mode == TalonControlMode.Position) {
             rearLeftMotor.changeControlMode(TalonControlMode.Follower);
             rearRightMotor.changeControlMode(TalonControlMode.Follower);
@@ -484,6 +483,22 @@ public class DriveTrain extends Subsystem {
 
         return leftIsClose && rightIsClose;
     }
+
+    public void set(double left, double right) {
+        if (setLeftFirst_) {
+            frontLeftMotor.set(left);
+            rearLeftMotor.set(left);
+            frontRightMotor.set(right);
+            rearRightMotor.set(right);
+        } else {
+            frontRightMotor.set(right);
+            rearRightMotor.set(right);
+            frontLeftMotor.set(left);
+            rearLeftMotor.set(left);
+        }
+        setLeftFirst_ = !setLeftFirst_;
+    }
+
 
     // Called by a command to run the position movement.
     public void executePositionMove() {
