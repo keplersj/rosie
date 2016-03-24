@@ -84,7 +84,7 @@ public class DriveTrain extends Subsystem {
 
     // To try and keep the robot driving straight we will flip the sequence of
     // who gets their position (Left and Right motors) set first.
-    private boolean setLeftFirst_ = true;
+    private boolean setLeftFirst_ = false;
 
     // Are we close to the position end ?
     private boolean isCloseDebounce_ = false;
@@ -162,7 +162,7 @@ public class DriveTrain extends Subsystem {
         if (debug_)
             printEncoderDebugging(true);
 
-        robotDrive.arcadeDrive(-y, x);
+        robotDrive.arcadeDrive(y, x);
     }
 
     // Stop it .... Just Stop it ......
@@ -257,7 +257,7 @@ public class DriveTrain extends Subsystem {
 
     // In autonomous mode we don't want to coast since it makes it harder to
     // to compensate for errors.
-    public void enableBrakeMode(boolean enable) {
+    private void enableBrakeMode(boolean enable) {
         frontLeftMotor.enableBrakeMode(enable);
         frontRightMotor.enableBrakeMode(enable);
         rearLeftMotor.enableBrakeMode(enable);
@@ -317,7 +317,7 @@ public class DriveTrain extends Subsystem {
             frontRightMotor.set(targetRightPosition_);
             frontLeftMotor.set(targetLeftPosition_);
         }
-        setLeftFirst_ = !setLeftFirst_;
+//        setLeftFirst_ = !setLeftFirst_;
     }
 
     // print every ten loops, printing too much too fast is generally bad for performance,
@@ -340,7 +340,7 @@ public class DriveTrain extends Subsystem {
         encoderDebugString_.append("\ttrg:");
         encoderDebugString_.append(targetLeftPosition_);
 
-        encoderDebugString_.append("\tL: ");
+        encoderDebugString_.append("\tR: ");
         encoderDebugString_.append("\tpos:");
         encoderDebugString_.append(frontRightMotor.getPosition() );
         encoderDebugString_.append("\terr:");
@@ -406,9 +406,9 @@ public class DriveTrain extends Subsystem {
     }
 
     // Internal convenience method
-    private void configVoltages(CANTalon talon, float nominal, float peak) {
+    private void configVoltages(CANTalon talon, float nominal, double d) {
         talon.configNominalOutputVoltage(nominal, -nominal);
-        talon.configPeakOutputVoltage(peak, -peak);
+        talon.configPeakOutputVoltage(d, -d);
     }
 
     // Internal convenience method
@@ -450,8 +450,8 @@ public class DriveTrain extends Subsystem {
         setTalonFeedbackDevice(frontLeftMotor);
         setTalonFeedbackDevice(frontRightMotor);
 
-        configVoltages(frontLeftMotor, 0, 6);
-        configVoltages(frontRightMotor, 0, 6);
+        configVoltages(frontLeftMotor, 0, 12);
+        configVoltages(frontRightMotor, 0, 12);
 
         /* set the allowable closed-loop error,
          * Closed-Loop output will be neutral within this range.
@@ -467,6 +467,8 @@ public class DriveTrain extends Subsystem {
         setClosedLoopGains(frontRightMotor);
         setClosedLoopGains(rearLeftMotor);
         setClosedLoopGains(rearRightMotor);
+        
+        enableBrakeMode(false);
     }
 
     private boolean closeToEndPosition() {
@@ -495,7 +497,7 @@ public class DriveTrain extends Subsystem {
             frontRightMotor.set(targetRightPosition_);
             frontLeftMotor.set(targetLeftPosition_);
         }
-        setLeftFirst_ = !setLeftFirst_;
+//        setLeftFirst_ = !setLeftFirst_;
 
         // Make sure to set the last position so the executePosition method can tell if
         // we re done.

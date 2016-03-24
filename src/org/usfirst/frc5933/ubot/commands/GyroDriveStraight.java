@@ -65,7 +65,7 @@ public class GyroDriveStraight extends Command {
             inches_ = SmartDashboard.getNumber("Inches for driving");
         }
 
-        Robot.driveTrain.enableBrakeMode(true);
+//        Robot.driveTrain.enableBrakeMode(true);
         RobotMap.helmsman.resetGyro();
     }
 
@@ -97,7 +97,7 @@ public class GyroDriveStraight extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.driveTrain.enableBrakeMode(false);
+//        Robot.driveTrain.enableBrakeMode(false);
         Robot.driveTrain.stop();
     }
 

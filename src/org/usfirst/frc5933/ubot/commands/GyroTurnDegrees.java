@@ -80,7 +80,7 @@ public class GyroTurnDegrees extends Command {
             speed_ = .5;
             degrees_ = SmartDashboard.getNumber("Degrees for turning");
         }
-        Robot.driveTrain.enableBrakeMode(true);
+//        Robot.driveTrain.enableBrakeMode(true);
         Robot.driveTrain.configForTeleopMode();
 
         RobotMap.helmsman.resetGyro();
@@ -137,7 +137,7 @@ public class GyroTurnDegrees extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.driveTrain.enableBrakeMode(false);
+//        Robot.driveTrain.enableBrakeMode(false);
     }
 
     // Called when another command which requires one or more of the same

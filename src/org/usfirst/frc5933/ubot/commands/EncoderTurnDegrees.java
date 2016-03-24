@@ -24,7 +24,7 @@ import org.usfirst.frc5933.ubot.Robot;
 public class EncoderTurnDegrees extends Command {
     private double degrees_ = 0;
     private boolean useDumbDashboard_ = true;
-    private double degreesToRotations_ = 0.021;
+    private double degreesToRotations_ = 0.027;
 
     public EncoderTurnDegrees(double degrees) {
         degrees_ = degrees;
@@ -50,6 +50,9 @@ public class EncoderTurnDegrees extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.driveTrain.configForTeleopMode(); //This solves clicking in the Talons.
+        Robot.driveTrain.configForAutonomous();
+
         if (useDumbDashboard_) {
             degrees_ = SmartDashboard.getNumber("Degrees for turning");
         }
