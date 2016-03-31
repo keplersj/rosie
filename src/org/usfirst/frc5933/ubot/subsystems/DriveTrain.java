@@ -281,7 +281,9 @@ public class DriveTrain extends Subsystem {
 
         if (mode == TalonControlMode.Position) {
             rearLeftMotor.changeControlMode(TalonControlMode.Follower);
+            rearLeftMotor.set(12);
             rearRightMotor.changeControlMode(TalonControlMode.Follower);
+            rearRightMotor.set(10);
         } else {
             rearLeftMotor.changeControlMode(mode);
             rearRightMotor.changeControlMode(mode);
