@@ -169,6 +169,10 @@ public class DriveTrain extends Subsystem {
         robotDrive.stopMotor();
     }
 
+    public void tankDrive(double speed) {
+        robotDrive.tankDrive(-speed, -speed);
+    }
+
     // Don't drink and drive ....
     public void driveStraight(double speed, double curve) {
         robotDrive.drive(speed, curve);

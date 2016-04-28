@@ -28,6 +28,7 @@ public class PreferenceConstants {
     public static final String AUTONOMOUS_COMMAND_GYRO_DRIVESTRAIGHT    = "GyroDriveStraight";
     public static final String AUTONOMOUS_COMMAND_GYRO_TURN				= "GyroTurnDegrees";
     public static final String AUTONOMOUS_COMMAND_UC_DRIVESTRAIGHT      = "UltrasonicDriveStraight";
+    public static final String AUTONOMOUS_COMMAND_DRIVE_OVER_TIME       = "DriveOverTime";
 
     public static final String DEBUG_SUBSYSTEM_DRIVE_TRAIN_KEY          = "DebugDriveTrain";
     public static final String DEBUG_SUBSYSTEM_ULTRASONIC_KEY           = "DebugUltrasonic";

@@ -150,6 +150,9 @@ public class Robot extends IterativeRobot {
         case PreferenceConstants.AUTONOMOUS_COMMAND_UC_DRIVESTRAIGHT:
             autonomousCommand = new UltrasonicDriveStraight();
             break;
+        case PreferenceConstants.AUTONOMOUS_COMMAND_DRIVE_OVER_TIME:
+            autonomousCommand = new DriveOverTime();
+            break;
         }
 
         System.out.println("Autonomous Command is: " + autonomousCommand.getName());
@@ -166,6 +169,7 @@ public class Robot extends IterativeRobot {
     public void initDashboardInput() {
         SmartDashboard.putNumber("Degrees for turning", 0);
         SmartDashboard.putNumber("Inches for driving", 200);
+        SmartDashboard.putNumber("Time to Drive Straight", 10);
     }
 
     /**
