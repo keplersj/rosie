@@ -6,10 +6,20 @@ import org.usfirst.frc5933.ubot.Robot;
 
 public class DriveOverTime extends Command {
 
+    private boolean useSmartDashboard = true;
     private long desiredTime;
+    private double seconds;
 
     public DriveOverTime() {
         requires(Robot.driveTrain);
+        if (!useSmartDashboard) {
+            seconds = SmartDashboard.getNumber("Time to Drive Straight");
+        }
+    }
+
+    public DriveOverTime(double time) {
+        seconds = time;
+        useSmartDashboard = true;
     }
 
     /**
@@ -18,7 +28,7 @@ public class DriveOverTime extends Command {
      */
     @Override
     protected void initialize() {
-        desiredTime = System.currentTimeMillis() + (long) (SmartDashboard.getNumber("Time to Drive Straight") * 1000);
+        desiredTime = System.currentTimeMillis() + (long) (seconds * 1000);
         Robot.driveTrain.configForTeleopMode();
     }
 
