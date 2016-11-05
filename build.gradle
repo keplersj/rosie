@@ -7,7 +7,7 @@ buildscript {
 	}
   }
   dependencies {
-    classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+'
+    classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+', classifier: 'Toast'
   }
 }
 
@@ -24,24 +24,17 @@ sourceSets {
   }
 }
 
-gradlerio.robotClass = 'org.usfirst.frc5933.ubot.Robot'
+repositories {
+    jcenter()
+    maven {
+        name = "Toast"
+        url = "http://dev.imjac.in/maven"
+    }
+}
+
+dependencies {
+    compile group: 'jaci.openrio.toast', name: 'Toast', version: '+'
+}
+
 gradlerio.team = "5933" // JudgeMent Call
-
-def robotManifest = {
-  attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
-  attributes 'Robot-Class': gradlerio.robotClass
-}
-
-jar {
-  from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-  manifest robotManifest
-}
-
-task genJavadoc(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
-}
-
-artifacts {
-  archives genJavadoc
-}
+gradlerio.deployFile = "toast/modules/${archivesBaseName}.jar"
