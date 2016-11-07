@@ -250,7 +250,7 @@ public class Robot extends IterativeModule {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        rumbleInYourPants();
+        vibrateControllers();
         turnSpindleIfNeeded();
         turnWinchIfNeeded();
         if (arcadeDrive != null) 
@@ -278,7 +278,7 @@ public class Robot extends IterativeModule {
     /**
      * Takes the Z Axis of the RoboRIO accelerometer, and passes it to the Joystick for haptic feedback of the robot.
      */
-    public void rumbleInYourPants() {
+    public void vibrateControllers() {
         double accel_z = RobotMap.helmsman.getAcceleromoterZ();
         Robot.oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(accel_z - 1));
         Robot.oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(accel_z - 1));
