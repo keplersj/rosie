@@ -13,7 +13,6 @@ public class GyroDriveStraight extends Command {
     private int tickCount_ = 0;
     public final static double SOME_MULTIPLIER = 5.5;
     private final static double someDegreeOfIntoxication = 0.003;
-    private boolean debug_ = false;
 
     public GyroDriveStraight() {
         requires(Robot.driveTrain);
@@ -39,8 +38,7 @@ public class GyroDriveStraight extends Command {
             double curve = angle * someDegreeOfIntoxication; //worked 2/23/16 as 0.003 "someDegreeOfIntoxication"
             Robot.driveTrain.driveStraight(-speed_, -curve); //DO NOT change this
 
-            if (debug_)
-                System.out.println("Ultrasonic Front: " + RobotMap.helmsman.getForwardUltrasonicDistance() + " - " + "Ultrasonic Left: " + RobotMap.helmsman.getPortUltrasonicDistance() + " - " + "Ultrasonic Right: " + RobotMap.helmsman.getStarboardUltrasonicDistance());
+            Robot.logger.debug("Ultrasonic Front: " + RobotMap.helmsman.getForwardUltrasonicDistance() + " - " + "Ultrasonic Left: " + RobotMap.helmsman.getPortUltrasonicDistance() + " - " + "Ultrasonic Right: " + RobotMap.helmsman.getStarboardUltrasonicDistance());
 
             if (RobotMap.helmsman.getForwardUltrasonicDistance() < inches_){ //drive until x' away from wall
                 ++absoluteCount_;

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import jaci.openrio.toast.lib.log.Logger;
 import jaci.openrio.toast.lib.module.IterativeModule;
 import org.usfirst.frc5933.ubot.commands.*;
 import org.usfirst.frc5933.ubot.subsystems.Arm;
@@ -28,6 +29,7 @@ public class Robot extends IterativeModule {
     public static Arm arm;
     public static BallGrabberSubsystem ballGrabberSubsystem;
     private static Winch winch;
+    public static Logger logger;
 
     /**
      * Get a Friendly name for the Module. This is what the Module is referenced by. This should be unique
@@ -37,7 +39,7 @@ public class Robot extends IterativeModule {
      */
     @Override
     public String getModuleName() {
-        return "Team-5933-UBot";
+        return "Rosie";
     }
 
     /**
@@ -48,15 +50,15 @@ public class Robot extends IterativeModule {
      */
     @Override
     public String getModuleVersion() {
-        return "0.1.0";
+        return "1.0.0";
     }
 
     /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
+     * Called on 'Pre-Initialization' of the robot. This is called before the Robot is indicated as 'ready to go'. Inputs
+     * and Outputs should be configured here. This method should not have much over-head
      */
     @Override
-    public void robotInit() {
+    public void prestart() {
         RobotMap.init();
         initDashboardInput();
         driveTrain = new DriveTrain();
@@ -69,6 +71,15 @@ public class Robot extends IterativeModule {
         // constructed yet. Thus, their requires() statements may grab null
         // pointers. Bad news. Don't move it.
         oi = new OI();
+    }
+
+    /**
+     * Called on 'Initialization' of the robot. This is called after the Robot is indicated as 'ready to go'. Things like
+     * Network Communications and Camera Tracking should be initialized here.
+     */
+    @Override
+    public void start() {
+        logger = new Logger(getModuleName(), Logger.ATTR_DEFAULT);
 
         arcadeDrive = new ArcadeDrive();
 
@@ -155,7 +166,7 @@ public class Robot extends IterativeModule {
             break;
         }
 
-        System.out.println("Autonomous Command is: " + autonomousCommand.getName());
+        logger.info("Autonomous Command is: " + autonomousCommand.getName());
     }
 
     // Read the preferences as setup by the smart dashboard preferences view.
@@ -191,9 +202,7 @@ public class Robot extends IterativeModule {
 
     @Override
     public void autonomousInit() {
-        // RobotMap.enableUltrasonicTrigger(true);
-        // RobotMap.helmsman.initTracking();
-    	Robot.driveTrain.configForTeleopMode(); //This solves clicking in the Talons.
+        Robot.driveTrain.configForTeleopMode(); //This solves clicking in the Talons.
         Robot.driveTrain.configForAutonomous();
 
         if (autonomousCommand != null) { 

@@ -62,7 +62,7 @@ public class GyroTurnDegrees extends Command {
         }
         else if ( now >= desired-5) {
             if (debug_)
-                System.out.println("It should be stopping!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Robot.logger.severe("It should be stopping!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             finished = true;
             Robot.driveTrain.stop();
         }
@@ -73,14 +73,14 @@ public class GyroTurnDegrees extends Command {
             Robot.driveTrain.set(0, -speed);
         }
         now = RobotMap.helmsman.getCurrentGyroAngle();
-        if (debug_)
-            System.out.println("Angle: " + now);
+
+        Robot.logger.debug("Angle: " + now);
+
         --tries;
         if (tries == 0) {
             finished = true;
             end();
-            if (debug_)
-                System.err.println("Failed to turn specified degrees.");
+            Robot.logger.debug("Failed to turn specified degrees.");
         }
 
     }

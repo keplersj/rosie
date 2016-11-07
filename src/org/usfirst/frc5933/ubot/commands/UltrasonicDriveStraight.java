@@ -15,15 +15,9 @@ public class UltrasonicDriveStraight extends Command {
     private final static double someDegreeOfIntoxication = 0.001;
     private double lastWallDistance = 12;
     private boolean useDumbDashboard_ = true;
-    private boolean debug_ = false;
 
     public UltrasonicDriveStraight() {
         requires(Robot.driveTrain);
-
-        // use the preferences to determine if we should debug this subsystem
-        if (Preferences.getInstance().containsKey(PreferenceConstants.DEBUG_SUBSYSTEM_ULTRASONIC_KEY)) {
-            debug_ = Preferences.getInstance().getBoolean(PreferenceConstants.DEBUG_SUBSYSTEM_ULTRASONIC_KEY, false);
-        }
     }
 
     // Called just before this Command runs the first time
@@ -47,8 +41,7 @@ public class UltrasonicDriveStraight extends Command {
             double curve = (wallDistance - lastWallDistance) * someDegreeOfIntoxication; //
             Robot.driveTrain.driveStraight(-speed_, -curve); //DO NOT change this
 
-            if (debug_)
-                System.out.println("Ultrasonic Front: " + RobotMap.helmsman.getForwardUltrasonicDistance() + " - " + "Ultrasonic Left: " + RobotMap.helmsman.getPortUltrasonicDistance() + " - " + "Ultrasonic Right: " + RobotMap.helmsman.getStarboardUltrasonicDistance());
+            Robot.logger.debug("Ultrasonic Front: " + RobotMap.helmsman.getForwardUltrasonicDistance() + " - " + "Ultrasonic Left: " + RobotMap.helmsman.getPortUltrasonicDistance() + " - " + "Ultrasonic Right: " + RobotMap.helmsman.getStarboardUltrasonicDistance());
 
             if (RobotMap.helmsman.getForwardUltrasonicDistance() < inches_){ //drive until x' away from wall
                 ++absoluteCount_;

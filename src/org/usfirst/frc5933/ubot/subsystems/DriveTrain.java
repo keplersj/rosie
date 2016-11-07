@@ -1,6 +1,7 @@
 package org.usfirst.frc5933.ubot.subsystems;
 
 import org.usfirst.frc5933.ubot.PreferenceConstants;
+import org.usfirst.frc5933.ubot.Robot;
 import org.usfirst.frc5933.ubot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -66,8 +67,6 @@ public class DriveTrain extends Subsystem {
     private boolean isCloseDebounce_ = false;
     private static final double POSITION_CLOSE = 200;
 
-    private boolean debug_ = false;
-
     private double closedLoopFeedForward_ = 0;
     private double closedLoopPorportional_ = 0.115;
     private double closedLoopIntegration_ = 0;
@@ -79,11 +78,6 @@ public class DriveTrain extends Subsystem {
 
     public DriveTrain() {
         super();
-
-        // use the preferences to determine if we should debug this subsystem
-        if (Preferences.getInstance().containsKey(PreferenceConstants.DEBUG_SUBSYSTEM_DRIVE_TRAIN_KEY)) {
-            debug_ = Preferences.getInstance().getBoolean(PreferenceConstants.DEBUG_SUBSYSTEM_DRIVE_TRAIN_KEY, false);
-        }
 
         // Make sure that the encoders and position data are counting in the right direction
         frontRightMotor.reverseOutput(true);
@@ -131,8 +125,7 @@ public class DriveTrain extends Subsystem {
         // x remain like it should and see how well it works. Make sure to handle
         // the cases where x is: 0, -, +.
 
-        if (debug_)
-            printEncoderDebugging(true);
+        printEncoderDebugging(true);
 
         robotDrive.arcadeDrive(y, x);
     }
@@ -220,10 +213,8 @@ public class DriveTrain extends Subsystem {
         // The rear motors are supposed to be in follow mode,
         // so we don't have to set the position for these
         // motors.
-        if (debug_) {
-            System.out.println("Start Position Movement");
-            printEncoderDebugging(false);
-        }
+        Robot.logger.debug("Start Position Movement");
+        printEncoderDebugging(false);
 
         if (setLeftFirst_) {
             frontLeftMotor.set(targetLeftPosition_);
@@ -262,7 +253,7 @@ public class DriveTrain extends Subsystem {
         encoderDebugString_.append(frontRightMotor.getClosedLoopError());
         encoderDebugString_.append("\ttrg:");
         encoderDebugString_.append(targetRightPosition_);
-        System.out.println(encoderDebugString_.toString());
+        Robot.logger.debug(encoderDebugString_.toString());
 
         encoderDebugString_.setLength(0);
     }
@@ -292,10 +283,8 @@ public class DriveTrain extends Subsystem {
 
     // Cleanup any position movement configuration.
     public void endPositionMovement() {
-        if (debug_) {
-            System.out.println("End Position Movement");
-            printEncoderDebugging(false);
-        }
+        Robot.logger.debug("End Position Movement");
+        printEncoderDebugging(false);
         configForTeleopMode();
     }
 
@@ -438,14 +427,12 @@ public class DriveTrain extends Subsystem {
         // Slow down the position movement so we don't have to do as much correction
         if (closeToEndPosition()) {
             if (!isCloseDebounce_) {
-                if (debug_)
-                    System.out.println("Position movement is getting close");
+                Robot.logger.debug("Position movement is getting close");
                 isCloseDebounce_ = true;
                 // configVoltages(frontLeftMotor, 0, 6);
                 // configVoltages(frontRightMotor, 0, 6);
             }
         }
-        if (debug_)
-            printEncoderDebugging(true);
+        printEncoderDebugging(true);
     }
 }
