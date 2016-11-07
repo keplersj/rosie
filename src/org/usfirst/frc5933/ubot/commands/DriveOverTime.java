@@ -17,7 +17,7 @@ public class DriveOverTime extends Command {
         }
     }
 
-    public DriveOverTime(double time) {
+    DriveOverTime(double time) {
         seconds = time;
         useSmartDashboard = true;
     }

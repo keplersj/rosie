@@ -1,33 +1,14 @@
 package org.usfirst.frc5933.ubot;
 
-import org.usfirst.frc5933.ubot.RobotMap;
-import org.usfirst.frc5933.ubot.mapping.FieldOfPlay;
-
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.CANTalon;
 
 public class Helmsman {
 
     private AnalogGyro gyro_ = RobotMap.sensorsAnalogGyro;
-    private double beginingGyroAngle_ = 0;
-    private double beginingGyroCenter_ = 0;
-    private double beginingGyroOffset_ = 0;
-    private double initialGyroAngle_ = 0;
-    private double initialGyroCenter_ = 0;
-    private double initialGyroOffset_ = 0;
 
-    private FieldOfPlay field_ = new FieldOfPlay();
     private BuiltInAccelerometer accel_ = new BuiltInAccelerometer();
-
-    private CANTalon frontLeftMotor_ = RobotMap.driveTrainFrontLeftMotor;
-    private double initialFrontLeftMotorPosition_ = 0;
-    private double currentFrontLeftMotorPosition_ = 0;
-
-    private CANTalon frontRightMotor_ = RobotMap.driveTrainFrontRightMotor;
-    private double initialFrontRightMotorPosition_ = 0;
-    private double currentFrontRightMotorPosition_ = 0;
 
     private static final double FORWARD_V2D = 85.7;     // Voltage to distance (inches) scalar for forward ultrasonic
     private static final double PORT_V2D = 85.7;     // Voltage to distance (inches) scalar for port ultrasonic
@@ -39,37 +20,10 @@ public class Helmsman {
 
     Helmsman() {
         gyro_.initGyro();
-        beginingGyroAngle_ = gyro_.getAngle();
-        beginingGyroCenter_ = gyro_.getCenter();
-        beginingGyroOffset_ = gyro_.getOffset();
     }
 
     public void resetGyro() {
         gyro_.reset();
-    }
-
-    public final double getBeginingGyroAngle() {
-        return beginingGyroAngle_;
-    }
-
-    public final double getBeginingGyroOffset() {
-        return beginingGyroOffset_;
-    }
-
-    public final double getBeginingGyroCenter() {
-        return beginingGyroCenter_;
-    }
-
-    public final double getInitialGyroAngle() {
-        return initialGyroAngle_;
-    }
-
-    public final double getInitialGyroOffset() {
-        return initialGyroOffset_;
-    }
-
-    public final double getInitialGyroCenter() {
-        return initialGyroCenter_;
     }
 
     public final double getCurrentGyroAngle() {
@@ -88,33 +42,8 @@ public class Helmsman {
         return starboardUltrasonic_.getAverageVoltage() * STARBOARD_V2D;
     }
 
-    public void initTracking() {
-        gyro_.reset();
-        initialGyroAngle_ = gyro_.getAngle();
-        initialGyroCenter_ = gyro_.getCenter();
-        initialGyroOffset_ = gyro_.getOffset();
-
-        initialFrontLeftMotorPosition_ = frontLeftMotor_.getPosition();
-        currentFrontLeftMotorPosition_ = initialFrontLeftMotorPosition_;
-
-        initialFrontRightMotorPosition_ = frontRightMotor_.getPosition();
-        currentFrontRightMotorPosition_ = initialFrontRightMotorPosition_;
-    }
-
-    public void trackPosition() {
-        currentFrontLeftMotorPosition_ = frontLeftMotor_.getPosition();
-        currentFrontRightMotorPosition_ = frontRightMotor_.getPosition();
-    }
-
-    public final double getAcceleromoterZ() {
+    final double getAcceleromoterZ() {
         return accel_.getZ();
     }
 
-    public final double getCurrentLeftMotorPosition() {
-        return currentFrontLeftMotorPosition_;
-    }
-
-    public final double getCurrentRightMotorPosition() {
-        return currentFrontRightMotorPosition_;
-    }
 }
