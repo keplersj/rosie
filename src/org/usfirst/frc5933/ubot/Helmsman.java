@@ -20,7 +20,6 @@ public class Helmsman {
 
     private FieldOfPlay field_ = new FieldOfPlay();
     private BuiltInAccelerometer accel_ = new BuiltInAccelerometer();
-    private static RiptServer cameraServer_;
 
     private CANTalon frontLeftMotor_ = RobotMap.driveTrainFrontLeftMotor;
     private double initialFrontLeftMotorPosition_ = 0;
@@ -43,10 +42,6 @@ public class Helmsman {
         beginingGyroAngle_ = gyro_.getAngle();
         beginingGyroCenter_ = gyro_.getCenter();
         beginingGyroOffset_ = gyro_.getOffset();
-        cameraServer_ = RiptServer.getInstance();
-        cameraServer_.setQuality(100);
-        cameraServer_.setSize(0);
-        cameraServer_.startAutomaticCapture("cam0");
     }
 
     public void resetGyro() {
