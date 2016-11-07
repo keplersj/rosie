@@ -30,10 +30,15 @@ repositories {
         name = "Toast"
         url = "http://dev.imjac.in/maven"
     }
+    maven {
+        url  "http://dl.bintray.com/judgementcall5933/toast"
+    }
 }
 
 dependencies {
     compile group: 'jaci.openrio.toast', name: 'Toast', version: '+'
+    //compile 'org.usfirst.frc5933:controller_feedback:+' //Depend on Source Code
+    toastModule 'org.usfirst.frc5933:controller_feedback:+' //Depend on Module (deployed to bot and run)
 }
 
 gradlerio.team = "5933" // JudgeMent Call
