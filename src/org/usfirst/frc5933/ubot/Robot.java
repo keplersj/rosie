@@ -107,7 +107,7 @@ public class Robot extends IterativeModule {
         if (!prefs.containsKey(PreferenceConstants.AUTONOMOUS_COMMAND_KEY)) {
             return;
         }
-        switch (prefs.getString(PreferenceConstants.AUTONOMOUS_COMMAND_KEY, PreferenceConstants.BACKUP_VALUE)) {
+        switch (prefs.getString(PreferenceConstants.AUTONOMOUS_COMMAND_KEY, PreferenceConstants.DEFAULT_VALUE)) {
         case PreferenceConstants.AUTONOMOUS_COMMAND_POS1_LOWBAR:
             autonomousCommand = new Pos1LowBar();
             break;

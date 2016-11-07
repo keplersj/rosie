@@ -2,7 +2,7 @@ package org.usfirst.frc5933.ubot;
 
 
 public class PreferenceConstants {
-    public static final String BACKUP_VALUE                             = "unknown";
+    public static final String DEFAULT_VALUE                            = "Pos1LowBar";
     public static final String AUTONOMOUS_COMMAND_KEY                   = "AutonomousCommand";
 
     public static final String AUTONOMOUS_COMMAND_POS1_LOWBAR           = "Pos1LowBar";
