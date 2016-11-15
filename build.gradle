@@ -7,21 +7,33 @@ buildscript {
 	}
   }
   dependencies {
-    classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+', classifier: 'Toast'
+      classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+', classifier: 'Toast'
+      classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M2'
   }
 }
 
+plugins {
+    id "net.saliman.cobertura" version "2.3.2"
+    id "com.github.kt3k.coveralls" version "2.7.1"
+}
+
 apply plugin: 'java'
-apply plugin: 'idea'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'GradleRIO'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 sourceSets {
-  main {
-    java {
-      srcDir 'src'
+    main {
+        java {
+            srcDir 'src'
+        }
     }
-  }
+    test {
+        java {
+            srcDir 'test'
+        }
+    }
 }
 
 repositories {
@@ -39,7 +51,12 @@ dependencies {
     compile group: 'jaci.openrio.toast', name: 'Toast', version: '+'
     //compile 'org.usfirst.frc5933:controller_feedback:+' //Depend on Source Code
     toastModule 'org.usfirst.frc5933:controller_feedback:+' //Depend on Module (deployed to bot and run)
+
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M2'
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M2'
 }
 
 gradlerio.team = "5933" // JudgeMent Call
 gradlerio.deployFile = "toast/modules/${archivesBaseName}.jar"
+
+cobertura.coverageFormats = ['html', 'xml']
