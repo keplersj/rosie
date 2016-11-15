@@ -11,6 +11,11 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 
+script:
+- ./gradlew assemble
+- ./gradlew verify
+- ./gradlew check
+
 after_success:
 - ./gradlew cobertura coveralls
 
