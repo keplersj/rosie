@@ -8,7 +8,6 @@ buildscript {
   }
   dependencies {
       classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+', classifier: 'Toast'
-      classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M2'
   }
 }
 
@@ -21,7 +20,6 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'GradleRIO'
-apply plugin: 'org.junit.platform.gradle.plugin'
 
 sourceSets {
     main {
@@ -39,21 +37,27 @@ sourceSets {
 repositories {
     jcenter()
     maven {
+        name = 'WPI'
+        url = 'http://first.wpi.edu/FRC/roborio/maven/release'
+    }
+    maven {
         name = "Toast"
         url = "http://dev.imjac.in/maven"
     }
     maven {
         url  "http://dl.bintray.com/judgementcall5933/toast"
     }
+    maven {
+        url "https://dl.bintray.com/judgementcall5933/utilities/"
+    }
 }
 
 dependencies {
     compile group: 'jaci.openrio.toast', name: 'Toast', version: '+'
-    //compile 'org.usfirst.frc5933:controller_feedback:+' //Depend on Source Code
-    toastModule 'org.usfirst.frc5933:controller_feedback:+' //Depend on Module (deployed to bot and run)
+    toastModule 'org.usfirst.frc5933:controller_feedback:+'
 
-    testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M2'
-    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M2'
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.strongback:strongback:1.1.7'
 }
 
 gradlerio.team = "5933" // JudgeMent Call
