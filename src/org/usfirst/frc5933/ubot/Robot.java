@@ -22,7 +22,7 @@ import org.usfirst.frc5933.ubot.subsystems.Winch;
  * directory.
  */
 public class Robot extends IterativeModule {
-    private Command autonomousCommand;
+    Command autonomousCommand;
     private Command arcadeDrive;
     public static OI oi;
     public static DriveTrain driveTrain;
@@ -71,6 +71,10 @@ public class Robot extends IterativeModule {
         // constructed yet. Thus, their requires() statements may grab null
         // pointers. Bad news. Don't move it.
         oi = new OI();
+
+        logger = new Logger(getModuleName(), Logger.ATTR_DEFAULT);
+
+        arcadeDrive = new ArcadeDrive();
     }
 
     /**
@@ -79,14 +83,10 @@ public class Robot extends IterativeModule {
      */
     @Override
     public void start() {
-        logger = new Logger(getModuleName(), Logger.ATTR_DEFAULT);
-
-        arcadeDrive = new ArcadeDrive();
-
         readPreferences();
     }
 
-    private void configAutonomousCommand() {
+    void configAutonomousCommand() {
         Preferences prefs = Preferences.getInstance();
         if (!prefs.containsKey(PreferenceConstants.AUTONOMOUS_COMMAND_KEY)) {
             return;
