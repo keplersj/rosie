@@ -19,7 +19,8 @@ addons:
       - libstdc++6
 
 after_success:
-- ./gradlew junitPlatformJacocoReport coveralls
+- ./gradlew junitPlatformJacocoReport
+- bash <(curl -s https://codecov.io/bash)
 
 notifications:
   slack:
