@@ -113,7 +113,7 @@ public class PreferenceConstantsTest extends RobotTestBase {
 
     @Test
     public void pos4RoughTerrainCommandTest() {
-        this.prefs.putString("AutonomousCommand", "Pos2RoughTerrain");
+        this.prefs.putString("AutonomousCommand", "Pos4RoughTerrain");
         this.robot.configAutonomousCommand();
         assertEquals(this.robot.autonomousCommand.getClass(), Pos4RoughTerrain.class);
     }
