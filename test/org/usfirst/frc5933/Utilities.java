@@ -1,5 +1,6 @@
 package org.usfirst.frc5933;
 
+import edu.wpi.first.wpilibj.Resource;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary;
 import edu.wpi.first.wpilibj.communication.UsageReporting;
@@ -12,7 +13,6 @@ import jaci.openrio.toast.core.script.js.JavaScript;
 import jaci.openrio.toast.core.security.ToastSecurityManager;
 import jaci.openrio.toast.core.shared.GlobalBlackboard;
 import jaci.openrio.toast.core.thread.Async;
-import jaci.openrio.toast.lib.Assets;
 import jaci.openrio.toast.lib.crash.CrashHandler;
 import jaci.openrio.toast.lib.log.Logger;
 import jaci.openrio.toast.lib.log.SysLogProxy;
@@ -25,10 +25,17 @@ import java.io.File;
 
 public class Utilities {
 
+    private static ProfilerSection profiler;
+    private static boolean setUpIsDone = false;
+
     /**
      * Toast Bootstrap in a function. This is very helpful for unit testing.
      */
-    public static void setupToast() {
+    public static void startToast() {
+        if (setUpIsDone) {
+            return;
+        }
+        
         Thread main_thread = Thread.currentThread();
         Thread watch_init_thread = new Thread(() -> {
             try {
@@ -49,7 +56,7 @@ public class Utilities {
                         }
                     });
                 }
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         });
         watch_init_thread.start();
@@ -57,7 +64,7 @@ public class Utilities {
         Thread.currentThread().setPriority(Thread.NORM_PRIORITY + 2);      // Slightly above normal priority, but below maximum priority.
         ToastBootstrap.startTimeNS = System.nanoTime();
         ToastBootstrap.startTimeMS = System.currentTimeMillis();
-        ProfilerSection profiler = Profiler.INSTANCE.section("Setup");
+        profiler = Profiler.INSTANCE.section("Setup");
         JavaScript.startLoading();
         profiler.start("ParseArgs");
         ToastBootstrap.toastHome = new File("run/gradle/test/toast/").getAbsoluteFile();
@@ -75,28 +82,23 @@ public class Utilities {
         profiler.stop("Crash");
 
         profiler.start("Misc");
-        System.out.println(Assets.getAscii("splash"));
         ToastBootstrap.toastLogger = new Logger("Toast", Logger.ATTR_DEFAULT);
         new GlobalBlackboard();
         profiler.stop("Misc");
 
         try {
             Thread.sleep(20);       // To avoid splash screen flush racing
-        } catch (InterruptedException e) { }
+        } catch (InterruptedException ignored) { }
 
-        // -------- NEW PHASE -------- //
         LoadPhase.CORE_PREINIT.transition();
         RobotLoader.preinit(Profiler.INSTANCE.section("RobotLoader"));
 
-        // -------- NEW PHASE -------- //
         LoadPhase.CORE_INIT.transition();
         RobotLoader.initCore(Profiler.INSTANCE.section("RobotLoader"));
 
         ModuleConfig.init();
 
-        // -------- NEW PHASE -------- //
         LoadPhase.PRE_INIT.transition();
-        ToastBootstrap.toastLogger.info("Slicing Loaf...");
         USBMassStorage.init();
         profiler.start("Configuration");
         ToastConfiguration.init();
@@ -108,9 +110,11 @@ public class Utilities {
         ClassPatcher classLoader = new ClassPatcher();
         classLoader.identifyPatches(true);
 
-        // -------- NEW PHASE -------- //
+        setUpIsDone = true;
+    }
+
+    public static void initToast() {
         LoadPhase.INIT.transition();
-        ToastBootstrap.toastLogger.info("Nuking Toast...");
         RobotLoader.postCore(Profiler.INSTANCE.section("RobotLoader"));
 
         profiler.start("Security");
@@ -120,5 +124,11 @@ public class Utilities {
         profiler.start("WPILib");
         RobotBase.initializeHardwareConfiguration();
         UsageReporting.report(FRCNetworkCommunicationsLibrary.tResourceType.kResourceType_Language, FRCNetworkCommunicationsLibrary.tInstances.kLanguage_Java);
+        LoadPhase.COMPLETE.transition();
+    }
+
+    public static void shutdownToast() {
+        Async.INSTANCE.finish();
+        Resource.restartProgram();
     }
 }

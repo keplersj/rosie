@@ -1,28 +1,24 @@
 package org.usfirst.frc5933.ubot;
 
 import edu.wpi.first.wpilibj.Preferences;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.usfirst.frc5933.RobotTestBase;
 import org.usfirst.frc5933.ubot.commands.Pos1LowBar;
+import org.usfirst.frc5933.ubot.commands.Pos2Mote;
+import org.usfirst.frc5933.ubot.commands.Pos2RockWall;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.usfirst.frc5933.Utilities.setupToast;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class PreferenceConstantsTest {
-    Preferences prefs;
-    static Robot robot;
+public class PreferenceConstantsTest extends RobotTestBase {
+    private Preferences prefs;
+    private Robot robot;
 
-    @BeforeClass
-    public static void setupClass() {
-        setupToast();
+    @BeforeEach
+    public void setup() {
         robot = new Robot();
         robot.prestart();
-    }
-
-    @Before
-    public void setup() {
         prefs = Preferences.getInstance();
     }
 
@@ -34,9 +30,23 @@ public class PreferenceConstantsTest {
     }
 
     @Test
-    public void pos1CommandTest() {
+    public void pos1LowBarCommandTest() {
         prefs.putString("AutonomousCommand", "Pos1LowBar");
         robot.configAutonomousCommand();
         assertEquals(robot.autonomousCommand.getClass(), Pos1LowBar.class);
+    }
+
+    @Test
+    public void pos2MoteCommandTest() {
+        prefs.putString("AutonomousCommand", "Pos2Mote");
+        robot.configAutonomousCommand();
+        assertEquals(robot.autonomousCommand.getClass(), Pos2Mote.class);
+    }
+
+    @Test
+    public void pos2RockwallCommandTest() {
+        prefs.putString("AutonomousCommand", "Pos2RockWall");
+        robot.configAutonomousCommand();
+        assertEquals(robot.autonomousCommand.getClass(), Pos2RockWall.class);
     }
 }

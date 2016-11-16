@@ -1,16 +1,17 @@
 package org.usfirst.frc5933.ubot;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.usfirst.frc5933.RobotTestBase;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RobotTest {
+public class RobotTest extends RobotTestBase {
 
     private static Robot robot;
 
-    @Before
-    public void beforeAll() {
+    @BeforeAll
+    public static void beforeAll() {
         robot = new Robot();
     }
 
