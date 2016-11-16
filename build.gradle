@@ -37,18 +37,11 @@ sourceSets {
 repositories {
     jcenter()
     maven {
-        name = 'WPI'
-        url = 'http://first.wpi.edu/FRC/roborio/maven/release'
-    }
-    maven {
         name = "Toast"
         url = "http://dev.imjac.in/maven"
     }
     maven {
         url  "http://dl.bintray.com/judgementcall5933/toast"
-    }
-    maven {
-        url "https://dl.bintray.com/judgementcall5933/utilities/"
     }
 }
 
@@ -57,7 +50,6 @@ dependencies {
     toastModule 'org.usfirst.frc5933:controller_feedback:+'
 
     testCompile 'junit:junit:4.11'
-    testCompile 'org.strongback:strongback:1.1.7'
 }
 
 gradlerio.team = "5933" // JudgeMent Call
