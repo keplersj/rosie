@@ -110,25 +110,22 @@ public class Utilities {
         ClassPatcher classLoader = new ClassPatcher();
         classLoader.identifyPatches(true);
 
-        setUpIsDone = true;
-    }
-
-    public static void initToast() {
         LoadPhase.INIT.transition();
         RobotLoader.postCore(Profiler.INSTANCE.section("RobotLoader"));
-
-        profiler.start("Security");
-        ToastSecurityManager.init();
-        profiler.stop("Security");
 
         profiler.start("WPILib");
         RobotBase.initializeHardwareConfiguration();
         UsageReporting.report(FRCNetworkCommunicationsLibrary.tResourceType.kResourceType_Language, FRCNetworkCommunicationsLibrary.tInstances.kLanguage_Java);
         LoadPhase.COMPLETE.transition();
+
+        setUpIsDone = true;
+    }
+
+    public static void initToast() {
     }
 
     public static void shutdownToast() {
-        Async.INSTANCE.finish();
+//        Async.INSTANCE.finish();
         Resource.restartProgram();
     }
 }
