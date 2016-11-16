@@ -31,167 +31,167 @@ public class PreferenceConstantsTest extends RobotTestBase {
     public void pos1LowBarCommandTest() {
         prefs.putString("AutonomousCommand", "Pos1LowBar");
         robot.configAutonomousCommand();
-        assertEquals(robot.autonomousCommand.getClass(), Pos1LowBar.class);
+        assertEquals(Pos1LowBar.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos2MoteCommandTest() {
         prefs.putString("AutonomousCommand", "Pos2Mote");
         robot.configAutonomousCommand();
-        assertEquals(robot.autonomousCommand.getClass(), Pos2Mote.class);
+        assertEquals(Pos2Mote.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos2RockwallCommandTest() {
         prefs.putString("AutonomousCommand", "Pos2RockWall");
         robot.configAutonomousCommand();
-        assertEquals(robot.autonomousCommand.getClass(), Pos2RockWall.class);
+        assertEquals(Pos2RockWall.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos2RampartCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos2Rampart");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos2Rampart.class);
+        assertEquals(Pos2Rampart.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos2RoughTerrainCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos2RoughTerrain");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos2RoughTerrain.class);
+        assertEquals(Pos2RoughTerrain.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos3MoteCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos3Mote");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos3Mote.class);
+        assertEquals(Pos3Mote.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos3RockwallCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos3RockWall");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos3RockWall.class);
+        assertEquals(Pos3RockWall.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos3RampartCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos3Rampart");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos3Rampart.class);
+        assertEquals(Pos3Rampart.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos3RoughTerrainCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos3RoughTerrain");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos3RoughTerrain.class);
+        assertEquals(Pos3RoughTerrain.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos4MoteCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos4Mote");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos4Mote.class);
+        assertEquals(Pos4Mote.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos4RockwallCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos4RockWall");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos4RockWall.class);
+        assertEquals(Pos4RockWall.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos4RampartCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos4Rampart");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos4Rampart.class);
+        assertEquals(Pos4Rampart.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos4RoughTerrainCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos4RoughTerrain");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos4RoughTerrain.class);
+        assertEquals(Pos4RoughTerrain.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos5MoteCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos5Mote");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos5Mote.class);
+        assertEquals(Pos5Mote.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos5RockwallCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos5RockWall");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos5RockWall.class);
+        assertEquals(Pos5RockWall.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos5RampartCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos5Rampart");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos5Rampart.class);
+        assertEquals(Pos5Rampart.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void pos5RoughTerrainCommandTest() {
         this.prefs.putString("AutonomousCommand", "Pos5RoughTerrain");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), Pos5RoughTerrain.class);
+        assertEquals(Pos5RoughTerrain.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void spyBoxCommandTest() {
         this.prefs.putString("AutonomousCommand", "SpyBox");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), SpyBox.class);
+        assertEquals(SpyBox.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void encoderDriveStraightCommandTest() {
         this.prefs.putString("AutonomousCommand", "EncoderDriveStraight");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), EncoderDriveStraight.class);
+        assertEquals(EncoderDriveStraight.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void encoderTurnDegreesCommandTest() {
         this.prefs.putString("AutonomousCommand", "EncoderTurnDegrees");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), EncoderTurnDegrees.class);
+        assertEquals(EncoderTurnDegrees.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void gyroDriveStraightCommandTest() {
         this.prefs.putString("AutonomousCommand", "GyroDriveStraight");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), GyroDriveStraight.class);
+        assertEquals(GyroDriveStraight.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void gyroTurnDegreesCommandTest() {
         this.prefs.putString("AutonomousCommand", "GyroTurnDegrees");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), GyroTurnDegrees.class);
+        assertEquals(GyroTurnDegrees.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void ultrasonicDriveStraightCommandTest() {
         this.prefs.putString("AutonomousCommand", "UltrasonicDriveStraight");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), UltrasonicDriveStraight.class);
+        assertEquals(UltrasonicDriveStraight.class, robot.autonomousCommand.getClass());
     }
 
     @Test
     public void driveOverTimeCommandTest() {
         this.prefs.putString("AutonomousCommand", "DriveOverTime");
         this.robot.configAutonomousCommand();
-        assertEquals(this.robot.autonomousCommand.getClass(), DriveOverTime.class);
+        assertEquals(DriveOverTime.class, robot.autonomousCommand.getClass());
     }
 }
