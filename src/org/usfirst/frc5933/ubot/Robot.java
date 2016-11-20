@@ -189,10 +189,6 @@ public class Robot extends IterativeModule {
      */
     @Override
     public void disabledInit() {
-        oi.getXBoxJoystick().setRumble(RumbleType.kLeftRumble, 0);
-        oi.getXBoxJoystick().setRumble(RumbleType.kRightRumble, 0);
-        oi.getXBoxJoystick2().setRumble(RumbleType.kLeftRumble, 0);
-        oi.getXBoxJoystick2().setRumble(RumbleType.kRightRumble, 0);
     }
 
     @Override
